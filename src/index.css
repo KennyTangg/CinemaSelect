@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+    
+    html{
+        background-color: #0f172a;
+        color:white;
+        font-family: "Poppins";
+    }
+
+    /* Navigation Bar Component Styling*/
+    .navigation-bar{
+        @apply flex items-center justify-between gap-8 px-8 h-20 bg-gray-950;
+        p{
+            @apply text-2xl font-semibold;
+            span{
+                @apply text-yellow-400;
+            }
+        }
+        div{
+            @apply flex items-center gap-6 h-6 font-medium;
+            button{
+                @apply text-sm px-4 cursor-pointer;
+            }
+            .sign-up{
+                @apply border-2 border-white rounded-2xl px-5 py-0.5 transition duration-300 hover:bg-white hover:text-gray-950 hover:border-gray-950;
+            }
+        }
+    }
+
+    /* Main Banner Section (Hero) Component Styling */
+    .hero{
+        @apply flex items-center justify-center;
+        img{
+            @apply brightness-70;
+        }
+        div {
+            @apply z-10 absolute lg:top-55 xl:top-70 2xl:top-90;
+                span{
+                    @apply flex flex-col items-center px-20;
+                    h1,h2{
+                        @apply px-30 text-center;
+                    }
+                    h1{
+                        @apply font-extrabold xl:text-5xl xl:py-6
+                        lg:text-3xl lg:py-3
+                        2xl:text-7xl 2xl:py-12;
+                    }
+                    h2{
+                        @apply font-light xl:text-2xl xl:py-3 
+                        lg:text-xl lg:py-1.5
+                        2xl:text-4xl 2xl:py-6;
+                    }
+                    button{
+                        @apply bg-yellow-400 text-gray-950 xl:px-10 xl:py-3 xl:text-xl rounded-2xl font-medium border-4 border-black cursor-pointer hover:bg-yellow-500
+                        lg:px-5 lg:py-1.5 lg:text-base
+                        2xl:px-20 2xl:py-6 2xl:text-2xl 2xl:font-extrabold;
+                    }
+            }
+        }
+    }
+}

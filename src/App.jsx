@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import NavigationBar from './components/Card';
+import Card from './components/Card';
 import Hero from './components/Hero';
+import HomePage from './pages/HomePage';
 
 const App = () => {
   return (
@@ -9,8 +10,7 @@ const App = () => {
       <BrowserRouter>
         <main>
           {/* Navigation */}
-          <Hero />
-
+          <HomePage />
           {/* Route default
           <Routes>
             <Route path="/" element={<HomePage />} />

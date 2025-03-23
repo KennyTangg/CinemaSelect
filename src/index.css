@@ -9,14 +9,14 @@
     }
     
     html{
-        background-color: #0f172a;
+        background: linear-gradient(to bottom, #0f172a, #0a0b10);
         color:white;
         font-family: "Poppins";
     }
 
     /* Navigation Bar Component Styling*/
     .navigation-bar{
-        @apply flex items-center justify-between gap-8 px-8 h-20 bg-gray-950;
+        @apply flex items-center justify-between gap-8 px-16 h-20;
         p{
             @apply text-2xl font-semibold;
             span{
@@ -38,7 +38,7 @@
     .hero{
         @apply flex items-center justify-center;
         img{
-            @apply brightness-70;
+            @apply brightness-70 w-7xl rounded-4xl 2xl:w-auto;
         }
         div {
             @apply z-10 absolute lg:top-55 xl:top-70 2xl:top-90;
@@ -64,5 +64,30 @@
                     }
             }
         }
+    }
+
+    /* Home Page Now showing Section Styling */
+    .home-now-showing{
+        @apply flex flex-col gap-10 py-15;
+        h1{
+            @apply pl-30 text-4xl font-bold;
+        }
+        div{
+            @apply flex justify-center gap-10;
+            span{
+                @apply flex flex-col items-center gap-5;
+                img{
+                    @apply w-65 rounded-3xl;
+                }
+                h5{
+                    @apply text-center font-medium text-sm;
+                }
+            }
+        }
+    }
+
+    /* Home page FAQ Section Styling */
+    .home-faq{
+        
     }
 }

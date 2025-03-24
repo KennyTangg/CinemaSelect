@@ -16,9 +16,9 @@
 
     /* Navigation Bar Component Styling*/
     .navigation-bar{
-        @apply flex items-center justify-between gap-8 px-16 h-20;
+        @apply flex items-center justify-between gap-8 sm:px-16 h-20;
         p{
-            @apply text-2xl font-semibold;
+            @apply font-semibold text-base ml-5 sm:mx-0 sm:text-2xl 2xl:text-3xl;
             span{
                 @apply text-yellow-400;
             }
@@ -26,10 +26,10 @@
         div{
             @apply flex items-center gap-6 h-6 font-medium;
             button{
-                @apply text-sm px-4 cursor-pointer;
+                @apply text-sm px-4 cursor-pointer 2xl:text-2xl;
             }
             .sign-up{
-                @apply border-2 border-white rounded-2xl px-5 py-0.5 transition duration-300 hover:bg-white hover:text-gray-950 hover:border-gray-950;
+                @apply border-2 border-white rounded-2xl px-5 py-0.5 mr-2 sm:mx-auto transition duration-300 hover:bg-white hover:text-gray-950 hover:border-gray-950;
             }
         }
     }
@@ -38,29 +38,29 @@
     .hero{
         @apply flex items-center justify-center;
         img{
-            @apply brightness-70 w-7xl rounded-4xl 2xl:w-auto;
+            @apply brightness-70 md:rounded-4xl max-w-full sm:w-3xl lg:w-4xl xl:w-7xl 2xl:w-full;
         }
         div {
-            @apply z-10 absolute lg:top-55 xl:top-70 2xl:top-90;
+            @apply z-10 absolute lg:top-55 xl:top-70 2xl:top-70;
                 span{
-                    @apply flex flex-col items-center px-20;
+                    @apply flex flex-col items-center px-10 sm:px-20;
                     h1,h2{
-                        @apply px-30 text-center;
+                        @apply lg:px-30 text-center;
                     }
                     h1{
-                        @apply font-extrabold xl:text-5xl xl:py-6
-                        lg:text-3xl lg:py-3
-                        2xl:text-7xl 2xl:py-12;
+                        @apply font-extrabold  xl:text-5xl xl:py-6
+                        lg:py-2 sm:px-10
+                        sm:text-3xl sm:py-1
+                        2xl:text-8xl 2xl:py-12;
                     }
                     h2{
-                        @apply font-light xl:text-2xl xl:py-3 
-                        lg:text-xl lg:py-1.5
-                        2xl:text-4xl 2xl:py-6;
+                        @apply font-light text-xs pt-5 pb-3.5 xl:text-2xl xl:py-3 lg:py-5
+                        sm:text-xl sm:py-7
+                        2xl:text-5xl 2xl:py-6;
                     }
                     button{
-                        @apply bg-yellow-400 text-gray-950 xl:px-10 xl:py-3 xl:text-xl rounded-2xl font-medium border-4 border-black cursor-pointer hover:bg-yellow-500
-                        lg:px-5 lg:py-1.5 lg:text-base
-                        2xl:px-20 2xl:py-6 2xl:text-2xl 2xl:font-extrabold;
+                        @apply bg-yellow-400 text-gray-950 text-sm px-5 py-1 rounded-2xl border-2  border-black cursor-pointer hover:bg-yellow-500
+                        sm:px-10 sm:py-2 sm:text-base xl:px-10 xl:py-3 xl:text-xl sm:font-medium sm:border-4 2xl:px-20 2xl:py-6 2xl:text-4xl 2xl:font-extrabold;
                     }
             }
         }
@@ -70,17 +70,17 @@
     .home-now-showing{
         @apply flex flex-col gap-10 py-15;
         h1{
-            @apply pl-30 text-4xl font-bold;
+            @apply p-0 text-center text-xl font-bold lg:pl-30 lg:text-left sm:text-3xl lg:text-4xl 2xl:text-6xl;
         }
         div{
-            @apply flex justify-center gap-10;
+            @apply grid mx-auto grid-cols-2 xl:gap-10 lg:grid-cols-4 lg:gap-3 sm:grid-cols-2;
             span{
-                @apply flex flex-col items-center gap-5;
+                @apply flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5;
                 img{
-                    @apply w-62 rounded-3xl;
+                    @apply rounded-3xl w-35 xl:w-62 sm:w-52 2xl:w-75;
                 }
                 h5{
-                    @apply text-center font-medium text-sm;
+                    @apply text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base 2xl:text-2xl;
                 }
             }
         }
@@ -90,7 +90,7 @@
     .home-faq{
         @apply flex flex-col gap-10 py-15;
         h1{
-            @apply pl-30 text-4xl font-bold;
+            @apply p-0 text-center text-xl font-bold lg:pl-30 lg:text-left sm:text-3xl lg:text-4xl 2xl:text-6xl;
         }
         .question{
             @apply flex flex-col items-center gap-8;
@@ -100,7 +100,7 @@
                     @apply flex items-center justify-between;
                 }
                 div, p{
-                    @apply bg-gray-800 w-6xl px-10 py-8 rounded font-medium text-xl;
+                    @apply bg-gray-800 w-80 px-5 sm:px-10 py-8 rounded font-medium text-sm sm:text-base xl:w-6xl lg:w-4xl sm:w-2xl 2xl:w-lvh 2xl:text-2xl;
                 }
             }
         }

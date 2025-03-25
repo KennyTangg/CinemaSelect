@@ -36,7 +36,7 @@ const Card = () => {
           </span>
         ))}
       </div>
-      <button onClick={handleNext} className="w-36 rounded-4xl self-center text-xl sm:text-2xl font-extrabold bg-gray-800 py-2 sm:py-4 border-3">Next</button>
+      <button onClick={handleNext} className="w-36 rounded-4xl self-center text-xl sm:text-2xl font-extrabold bg-gray-800 py-2 sm:py-4 border-3 hover:bg-gray-900 hover:cursor-pointer">Next</button>
     </section>
   )
 }

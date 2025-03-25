@@ -7,14 +7,14 @@ const Footer = () => {
           
           {/* Column 1: About */}
           <div >
-            <h4 className="font-bold text-lg mb-4 2xl:text-3xl">About Us</h4>
-            <p className="text-sm 2xl:text-xl">We are an easy-to-use online platform where you can quickly find and book movie tickets for enjoyable theater experience.</p>
+            <h4 className="font-bold text-lg mb-4">About Us</h4>
+            <p className="text-sm">We are an easy-to-use online platform where you can quickly find and book movie tickets for enjoyable theater experience.</p>
           </div>
   
           {/* Column 2: Navigation */}
           <div>
-            <h4 className="font-bold text-lg mb-4 2xl:text-3xl">Quick Links</h4>
-            <ul className="text-sm 2xl:text-2xl">
+            <h4 className="font-bold text-lg mb-4">Quick Links</h4>
+            <ul className="text-sm">
               <li><a className="text-gray-400 hover:text-white hover:cursor-pointer">About</a></li>
               <li><a className="text-gray-400 hover:text-white hover:cursor-pointer">Services</a></li>
               <li><a className="text-gray-400 hover:text-white hover:cursor-pointer">Contact</a></li>
@@ -23,15 +23,15 @@ const Footer = () => {
   
           {/* Column 3: Contact */}
           <div>
-            <h4 className="font-bold text-lg mb-4 2xl:text-3xl">Contact</h4>
-            <p className="text-sm 2xl:text-2xl" >Email: cinema@select.com</p>
-            <p className="text-sm 2xl:text-2xl" >Phone: (123) 456-7890</p>
+            <h4 className="font-bold text-lg mb-4">Contact</h4>
+            <p className="text-sm" >Email: cinema@select.com</p>
+            <p className="text-sm" >Phone: (123) 456-7890</p>
           </div>
   
           {/* Column 4: Social Media */}
           <div>
-            <h4 className="font-bold text-lg mb-4 2xl:text-3xl">Follow Us</h4>
-            <div className="flex space-x-4 text-sm 2xl:text-2xl">
+            <h4 className="font-bold text-lg mb-4">Follow Us</h4>
+            <div className="flex space-x-4 text-sm">
               <a className="text-gray-400 hover:text-white hover:cursor-pointer">Facebook</a>
               <a className="text-gray-400 hover:text-white hover:cursor-pointer">Twitter</a>
               <a className="text-gray-400 hover:text-white hover:cursor-pointer">Instagram</a>
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
   
         {/* Footer Bottom */}
-        <div className="text-center text-gray-400 mt-10 sm:mt-15 text-sm sm:text-base 2xl:text-2xl">
+        <div className="text-center text-gray-400 mt-10 sm:mt-15 text-sm sm:text-base">
           <p>&copy; 2025 CinemaSelect. All rights reserved.</p>
         </div>
       </footer>

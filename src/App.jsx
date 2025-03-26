@@ -13,8 +13,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<RegisterPage />} />
-            {/* <Route path="/contact" element={<ContactPage />} />
-            <Route path="*" element={<h1>404: Page Not Found</h1>} /> */}
+            <Route path="/signup" element={<RegisterPage />} />
+            <Route path="*" element={<h1 className="flex items-center justify-center min-h-screen text-3xl">404: Page Not Found</h1>} />
           </Routes>
         </main>
       </BrowserRouter>

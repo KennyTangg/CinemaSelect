@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import registerImage from "../assets/register-background.jpg";
+import authImage from "../assets/auth-background.jpg";
 
-const Register = () => {
+const Auth = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -71,7 +71,7 @@ const Register = () => {
     )
 }
 
-class RegisterPage extends React.Component {
+class AuthPage extends React.Component {
     constructor(props){
         super(props)
     }
@@ -79,11 +79,11 @@ class RegisterPage extends React.Component {
     render(){
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-800">
-                 <img src={registerImage} alt="Movies Background" className='absolute -z-10 sm:z-10 sm:h-screen xl:w-screen brightness-50'/>
-                <Register />
+                 <img src={authImage} alt="Movies Background" className='absolute -z-10 sm:z-10 sm:h-screen xl:w-screen brightness-50'/>
+                <Auth />
             </div>
         )
     }
 }
 
-export default RegisterPage
+export default AuthPage

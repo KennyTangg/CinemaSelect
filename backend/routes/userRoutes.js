@@ -1,12 +1,12 @@
 const express = require('express');
-const router = express.Router();
+const userRouter = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const protect = require('../middleware/validateToken');
 
 // Sign up user
-router.post('/signup', async (req, res) => {
+userRouter.post('/signup', async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -36,7 +36,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // Login user
-router.post('/login', async (req, res) => {
+userRouter.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -60,4 +60,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = userRouter;

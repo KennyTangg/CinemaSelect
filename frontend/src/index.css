@@ -68,26 +68,6 @@
         }
     }
 
-    /* Home Page Now showing Section Styling */
-    .home-now-showing{
-        @apply flex flex-col gap-10 pt-15;
-        h1{
-            @apply p-0 text-center text-xl font-bold lg:pl-30 lg:text-left sm:text-3xl lg:text-4xl;
-        }
-        div{
-            @apply grid mx-auto grid-cols-2 xl:gap-10 lg:grid-cols-4 lg:gap-3 sm:grid-cols-2;
-            span{
-                @apply flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5;
-                img{
-                    @apply rounded-3xl w-35 xl:w-62 sm:w-52;
-                }
-                h5{
-                    @apply text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base;
-                }
-            }
-        }
-    }
-
     /* Home page FAQ Section Styling */
     .home-faq{
         @apply flex flex-col gap-10 py-15;

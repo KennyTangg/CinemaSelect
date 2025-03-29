@@ -16,7 +16,7 @@ const Auth = () => {
     };
 
     return (
-        <div className=" bg-gray-800 px-10 sm:px-19 pb-20 pt-15 rounded-xl shadow-xl w-full max-w-md z-50 border-2 border-yellow-400">
+        <div className=" bg-gray-800 px-10 sm:px-19 pb-20 pt-15 rounded-xl shadow-xl w-full max-w-md z-50">
             <h2 className="text-3xl font-bold text-center text-yellow-400">
                 {isLoginPage ? "Login to your account" : "Create an account"}</h2>
             <p className="text-gray-400 text-sm text-center mb-10 mt-3 ">
@@ -81,7 +81,7 @@ class AuthPage extends React.Component {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-800">
                 <Link to="/">
-                    <button className='flex gap-2.5 bg-gray-800 text-yellow-400 border-yellow-400 sm:border-2 font-medium px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer'> 
+                    <button className='flex gap-2.5 bg-yellow-400 text-gray-800 font-semibold px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer hover:bg-yellow-500'> 
                         <ArrowBack /> 
                         <h2>Back</h2>
                     </button>

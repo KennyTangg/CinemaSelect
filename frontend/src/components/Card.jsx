@@ -27,12 +27,11 @@ const Card = () => {
 
   return (
     <>
-      <h1>NOW SHOWING IN CINEMAS</h1>
-      <div>
+      <div className='grid mx-auto grid-cols-2 xl:gap-10 lg:grid-cols-4 lg:gap-3 sm:grid-cols-2'>
         {displayedMovies.map((data, index) => (
-          <span key={index}>
-            <img src={data.name} alt={data.title} />
-            <h5>{data.title}</h5>
+          <span key={index} className='flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5'>
+            <img src={data.name} alt={data.title} className='rounded-3xl w-35 xl:w-62 sm:w-52'/>
+            <h5 className='text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base' >{data.title}</h5>
           </span>
         ))}
       </div>

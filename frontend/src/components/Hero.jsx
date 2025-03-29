@@ -8,8 +8,8 @@ const Hero = () => {
       <header className="navigation-bar">
         <p>Cinema <span>Select</span></p>
         <div> 
-          <button className="login"><Link to="/login" >Login</Link></button>
-          <button className="sign-up"><Link to="/signup">Sign up</Link></button>
+        <Link to="/login"><button className="login">Login</button></Link>
+        <Link to="/signup"><button className="sign-up">Sign up</button></Link>
         </div>
       </header>
 
@@ -18,7 +18,7 @@ const Hero = () => {
           <span>
             <h1>Your Favorite Shows, One Click Away Book Tickets Instantly!</h1>
             <h2>Join us today! Log in or sign up to start booking.</h2>
-            <button><Link to="/signup">Get Started</Link></button>
+            <Link to="/signup"><button>Get Started</button></Link>
           </span>
         </div>
         <img src={heroImage} alt="Main Banner Image"/>

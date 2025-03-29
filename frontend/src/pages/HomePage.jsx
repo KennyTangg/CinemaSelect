@@ -9,8 +9,12 @@ const HomePage = () => {
     return (
         <section>
             <Hero />
-            <Card />
-            <FAQ />
+            <section className="home-now-showing">
+                <Card />
+            </section>
+            <section className="home-faq">
+                <FAQ />
+            </section>    
             <Footer />
         </section>
     )

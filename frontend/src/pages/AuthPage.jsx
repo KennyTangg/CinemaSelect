@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import authImage from "../assets/auth-background.jpg";
 
 const Auth = () => {
@@ -66,7 +66,7 @@ const Auth = () => {
             </button>
             </form>
             <p className="text-center mt-10 text-sm" > 
-                {isLoginPage ? (<>Need an account? <a>Sign Up</a></>) : (<>Already a user? <a>Login</a></>)}</p>
+                {isLoginPage ? (<>Need an account? <Link to="/signup" className='hover:underline'>Sign Up</Link></>) : (<>Already a user? <Link to="/login" className='hover:underline'>Login</Link></>)}</p>
     </div>
     )
 }

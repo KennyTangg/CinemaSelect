@@ -26,7 +26,7 @@ const FAQ = () => {
   }
 
   return (
-    <section className="home-faq">
+    <>
       <h1>Frequently Asked Questions</h1>
       <div className="question">
         {questions.map((question, index) => (
@@ -39,7 +39,7 @@ const FAQ = () => {
           </span>
         ))}
       </div>
-    </section>
+    </>
   )
 }
 export default FAQ

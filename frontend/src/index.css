@@ -14,6 +14,10 @@
         font-family: "Poppins";
     }
 
+    img {
+        @apply select-none pointer-events-none;
+    }
+    
     /* Navigation Bar Component Styling*/
     .navigation-bar{
         @apply flex items-center justify-between gap-8 sm:px-16 h-20;

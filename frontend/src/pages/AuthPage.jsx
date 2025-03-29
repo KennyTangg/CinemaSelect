@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import authImage from "../assets/auth-background.jpg";
+import { ArrowBack } from '@mui/icons-material';
 
 const Auth = () => {
     const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const Auth = () => {
     };
 
     return (
-        <div className=" bg-gray-800 px-10 sm:px-20 pb-20 pt-15 rounded-xl shadow-xl w-full max-w-md z-50">
+        <div className=" bg-gray-800 px-10 sm:px-19 pb-20 pt-15 rounded-xl shadow-xl w-full max-w-md z-50 border-2 border-yellow-400">
             <h2 className="text-3xl font-bold text-center text-yellow-400">
                 {isLoginPage ? "Login to your account" : "Create an account"}</h2>
             <p className="text-gray-400 text-sm text-center mb-10 mt-3 ">
@@ -79,7 +80,13 @@ class AuthPage extends React.Component {
     render(){
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-800">
-                 <img src={authImage} alt="Movies Background" className='absolute -z-10 sm:z-10 sm:h-screen xl:w-screen brightness-50'/>
+                <Link to="/">
+                    <button className='flex gap-2.5 bg-gray-800 text-yellow-400 border-yellow-400 sm:border-2 font-medium px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer'> 
+                        <ArrowBack /> 
+                        <h2>Back</h2>
+                    </button>
+                </Link>
+                <img src={authImage} alt="Movies Background" className='absolute -z-10 sm:z-10 sm:h-screen xl:w-screen brightness-75'/>
                 <Auth />
             </div>
         )

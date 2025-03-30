@@ -109,29 +109,12 @@ const MainPage = () => {
                 </nav>
 
                 {/* Page Content */}
-                <div className="p-8">
+                <div className="px-10 py-8">
                     {/* Featured Section */}
                     <section className="mb-12">
                         <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Featured Movies</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {/* Add your movie cards here */}
+                        <div>
                             <Card />
-                        </div>
-                    </section>
-
-                    {/* Now Playing Section */}
-                    <section className="mb-12">
-                        <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Now Playing</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {/* Add your movie cards here */}
-                        </div>
-                    </section>
-
-                    {/* Recommended Section */}
-                    <section>
-                        <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Recommended For You</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {/* Add your movie cards here */}
                         </div>
                     </section>
                 </div>

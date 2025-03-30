@@ -81,12 +81,14 @@ class AuthPage extends React.Component {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-800">
                 <Link to="/">
-                    <button className='flex gap-2.5 bg-yellow-400 text-gray-800 font-semibold px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer hover:bg-yellow-500'> 
+                    <button className='flex gap-2.5 sm:bg-yellow-400 text-yellow-400 sm:text-gray-800 font-semibold px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer'> 
                         <ArrowBack /> 
                         <h2>Back</h2>
                     </button>
                 </Link>
-                <img src={authImage} alt="Movies Background" className='absolute -z-10 sm:z-10 sm:h-screen xl:w-screen brightness-75'/>
+                <img src={authImage} alt="Movies Background" className='absolute hidden sm:block sm:h-screen xl:w-screen'/>
+                <div className="absolute hidden sm:block inset-0 z-10 bg-[radial-gradient(circle,rgba(0,0,0,0.2)_50%,rgba(0,0,0,0.5)_60%,rgba(0,0,0,0.8)_80%,rgba(0,0,0,1)_100%)]">
+                </div>
                 <Auth />
             </div>
         )

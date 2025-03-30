@@ -34,7 +34,7 @@ const Card = () => {
     <>
       <div className={`${isHomePage 
         ? 'grid mx-auto grid-cols-2 xl:gap-10 lg:grid-cols-4 lg:gap-3 sm:grid-cols-2' 
-        : 'flex overflow-x-auto space-x-10 py-4 px-2 lg:px-0 custom-scrollbar pb-6'}`}>
+        : 'flex overflow-x-auto space-x-10 py-4 px-2 lg:px-0 custom-scrollbar pb-10'}`}>
         {isHomePage 
         ? displayedMovies.map((data, index) => (
           <span key={index} className='flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5'>
@@ -44,10 +44,10 @@ const Card = () => {
         )) 
         : movieData.map((data, index) => (
           <Link to={data.path} key={index} className='flex-shrink-0 relative flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5 group hover:cursor-pointer'>
-              <img src={data.name} alt={data.title} className='rounded-3xl xl:w-62 sm:w-42'/>
-              <div class="absolute bottom-10 rounded-3xl xl:w-63 sm:w-42 inset-0 bg-gradient-to-b from-transparent to-black opacity-850 group-hover:block hidden z-10"></div>
-              <button className='absolute bottom-15 font-semibold bg-gray-800 text-yellow-400 px-10 py-3 rounded-xl group-hover:block hidden z-10 hover:cursor-pointer'>Book Ticket</button>
-              <h5 className='text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base select-none' >{data.title}</h5>
+              <img src={data.name} alt={data.title} className='rounded-xl sm:w-50'/>
+              <div class="absolute bottom-15 rounded-xl sm:w-50 inset-0 bg-gradient-to-b from-transparent to-black opacity-850 group-hover:block hidden z-10"></div>
+              <button className='absolute bottom-20 text-sm font-semibold bg-gray-800 text-yellow-400 px-8 py-2 rounded-lg group-hover:block hidden z-10 hover:cursor-pointer'>Book Ticket</button>
+              <h5 className='text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base max-w-50 select-none' >{data.title}</h5>
           </Link>
         ))}
 

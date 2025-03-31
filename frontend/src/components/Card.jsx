@@ -1,21 +1,14 @@
 import React, { use, useState} from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import moviePoster1 from "../assets/movie-poster-1.jpg";
-import moviePoster2 from "../assets/movie-poster-2.jpg";
-import moviePoster3 from "../assets/movie-poster-3.jpg";
-import moviePoster4 from "../assets/movie-poster-4.jpg";
-import moviePoster5 from "../assets/movie-poster-5.jpg";
-import moviePoster6 from "../assets/movie-poster-6.jpg";
-import moviePoster7 from "../assets/movie-poster-7.jpg";
 
 const movieData = [
-  { name: moviePoster1, title: "INTERSTELLAR", path: '/interstellar' },
-  { name: moviePoster2, title: "SPIDER-MAN: INTO THE SPIDER-VERSE", path:'spiderman' },
-  { name: moviePoster3, title: "AVENGERS: INFINITY WAR", path:'/avengers'},
-  { name: moviePoster4, title: "THE SHAWSHANK REDEMPTION", path:'/shawshank' },
-  { name: moviePoster5, title: "OPPENHEIMER", path:'/oppenheimer' },
-  { name: moviePoster6, title: "TOP GUN: MAVERICK", path:'/maverick' },
-  { name: moviePoster7, title: "JOKER (2019)", path:'/joker' }
+  { name: "/movie-poster-1.jpg", title: "INTERSTELLAR", path: '/interstellar' },
+  { name: "/movie-poster-2.jpg", title: "SPIDER-MAN: INTO THE SPIDER-VERSE", path:'spiderman' },
+  { name: "/movie-poster-3.jpg", title: "AVENGERS: INFINITY WAR", path:'/avengers'},
+  { name: "/movie-poster-4.jpg", title: "THE SHAWSHANK REDEMPTION", path:'/shawshank' },
+  { name: "/movie-poster-5.jpg", title: "OPPENHEIMER", path:'/oppenheimer' },
+  { name: "/movie-poster-6.jpg", title: "TOP GUN: MAVERICK", path:'/maverick' },
+  { name: "/movie-poster-7.jpg", title: "JOKER (2019)", path:'/joker' }
 ];
 
 const Card = () => {

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const movieRouter = require('./routes/movieRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -15,9 +16,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch((error) => console.error('MongoDB connection error:', error));
 
 // Test route
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend is working!' });
-});
+app.use('/api/movies', movieRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -50,8 +50,8 @@ const MoviePage = () => {
                     <p>Duration : <span className='pl-5 text-gray-200'>{movies[0].duration} minutes</span></p>
                     <p>Director : <span className='pl-6 text-gray-200'>{movies[0].director}</span></p>
                     <div className='flex justify-around py-4 text-gray-400 font-bold'>
-                        <h2 onClick={handleClick} className={`${isSelected ? "text-gray-200" : "text-gray-400"} hover:cursor-pointer hover:underline`}>SYNOPSIS</h2>
-                        <h2 onClick={handleClick} className={`${isSelected ? "text-gray-400" : "text-gray-200"} hover:cursor-pointer hover:underline`}>SCHEDULE</h2>
+                        <button onClick={handleClick} className={`${isSelected ? "text-gray-200" : "text-gray-400"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}>SYNOPSIS</button>
+                        <button onClick={handleClick} className={`${isSelected ? "text-gray-400" : "text-gray-200"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}>SCHEDULE</button>
                     </div>
                     {isSelected 
                     ? <p>{movies[0].synopsis}</p>

@@ -3,22 +3,43 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const MoviePage = () => {
-    const [movies,setMovies] = useState([]);
-    const [isSelected,setSelected] = useState(true);
-    const [loading,setLoading] = useState(true);
-    const [error,setError] = useState(null);
-    
+    const [movies, setMovies] = useState([]);
+    const [isSelected, setSelected] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null);
+
+    const getShowDates = () => {
+        const days = [];
+        for (let i = 0; i < 44; i++) {
+            const date = new Date();
+            date.setDate(date.getDate() + i);
+            days.push({
+                full: date,
+                day: date.toLocaleDateString('en-US', { weekday: 'short' }),
+                date: date.getDate().toString().padStart(2, '0'),
+                month: date.toLocaleDateString('en-US', { month: 'short' })
+            });
+        }
+        return days;
+    };
+
+    const showTimes = [
+        "10:00 AM", "12:30 PM", "3:00 PM", "5:30 PM", "8:00 PM", "10:30 PM"
+    ];
+
     useEffect(() => {
         const fetchMovies = async () => {
-            try{
+            try {
                 const response = await axios.get('/api/movies');
-                console.log("API response: ",response.data)
                 setMovies(response.data);
                 setLoading(false);
-            } catch (error){
-                console.error("Error fetching movies data: ",error);
+                setSelectedDate(getShowDates()[0].full);
+            } catch (error) {
+                console.error("Error fetching movies data: ", error);
                 setError(error.message);
-                setLoading(true);
+                setLoading(false);
             }
         };
 
@@ -27,10 +48,27 @@ const MoviePage = () => {
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
+    if (!movies.length) return <div>No movies found</div>;
 
     const handleClick = () => {
         setSelected(!isSelected);
-    }
+    };
+
+    const handleDateSelect = (date) => {
+        setSelectedDate(date);
+        setSelectedTime(null); 
+    };
+
+    const handleTimeSelect = (time) => {
+        setSelectedTime(time);
+    };
+
+    // Helper function to check if two dates are the same
+    const isSameDate = (date1, date2) => {
+        return date1.getDate() === date2.getDate() && 
+               date1.getMonth() === date2.getMonth() && 
+               date1.getFullYear() === date2.getFullYear();
+    };
 
     return (
         <div className='min-h-screen bg-gray-900'>
@@ -43,23 +81,84 @@ const MoviePage = () => {
                 ></iframe>
             </div>
             <section className='flex gap-8 sm:mx-50'>
-                <img src={movies[0].posterPath} className='relative bottom-10 w-35 sm:w-48 rounded-lg'></img>
+                <img src={movies[0].posterPath} className='relative bottom-10 w-35 sm:w-48 rounded-lg' alt={movies[0].title} />
                 <div className='text-gray-400 space-y-1 w-full'>
                     <h1 className='text-2xl pt-8 font-bold text-gray-200'>{movies[0].title}</h1>
                     <p>Genre : <span className='pl-10 text-gray-200'>{movies[0].genre}</span></p>
                     <p>Duration : <span className='pl-5 text-gray-200'>{movies[0].duration} minutes</span></p>
                     <p>Director : <span className='pl-6 text-gray-200'>{movies[0].director}</span></p>
-                    <div className='flex justify-around py-4 text-gray-400 font-bold'>
-                        <button onClick={handleClick} className={`${isSelected ? "text-gray-200" : "text-gray-400"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}>SYNOPSIS</button>
-                        <button onClick={handleClick} className={`${isSelected ? "text-gray-400" : "text-gray-200"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}>SCHEDULE</button>
-                    </div>
-                    {isSelected 
-                    ? <p>{movies[0].synopsis}</p>
-                    : <h1>Testing</h1>}
                 </div>               
             </section>
+            <div className='flex justify-around pb-4 text-gray-400 font-bold mx-50'>
+                <button 
+                    onClick={handleClick} 
+                    className={`${isSelected ? "text-gray-200" : "text-gray-400"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}
+                >
+                    SYNOPSIS
+                </button>
+                <button 
+                    onClick={handleClick} 
+                    className={`${isSelected ? "text-gray-400" : "text-gray-200"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}
+                >
+                    SCHEDULE
+                </button>
+            </div>
+            
+            {isSelected ? (
+                <p className='mx-50'>{movies[0].synopsis}</p>
+            ) : (
+                <div className='mx-50'>
+                    {/* Date Selection */}
+                    <div className="flex gap-2 overflow-x-auto pb-4 custom-scrollbar">
+                        {getShowDates().map((day, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handleDateSelect(day.full)}
+                                className={`flex flex-col items-center min-w-[80px] p-2 rounded-lg border 
+                                    ${selectedDate && isSameDate(selectedDate, day.full)
+                                        ? 'bg-yellow-400 text-gray-900 border-yellow-400' 
+                                        : 'border-gray-700 hover:border-yellow-400'}`}
+                            >
+                                <span className="text-sm">{day.day}</span>
+                                <span className="text-lg font-bold">{day.date}</span>
+                                <span className="text-sm">{day.month}</span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Show Times */}
+                    {selectedDate && (
+                        <div className="my-6">
+                            <h3 className="text-gray-200 mb-4">Available Shows</h3>
+                            <div className="grid grid-cols-3 gap-3">
+                                {showTimes.map((time, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => handleTimeSelect(time)}
+                                        className={`p-2 rounded-lg border 
+                                            ${selectedTime === time 
+                                                ? 'bg-yellow-400 text-gray-900 border-yellow-400' 
+                                                : 'border-gray-700 hover:border-yellow-400'}`}
+                                    >
+                                        {time}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Book Button */}
+                    {selectedDate && selectedTime && (
+                        <div className="mt-6">
+                            <button className="w-full bg-yellow-400 text-gray-900 py-3 rounded-lg font-bold hover:bg-yellow-500">
+                                Book Tickets
+                            </button>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
 export default MoviePage;

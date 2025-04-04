@@ -54,9 +54,12 @@ const MoviePage = () => {
         setSelected(!isSelected);
     };
 
-    const handleDateSelect = (date) => {
-        setSelectedDate(date);
-        setSelectedTime(null); 
+    const handleDateSelect = (date, index) => {
+        // Only allow selection for first 4 days
+        if (index < 4) {
+            setSelectedDate(date);
+            setSelectedTime(null);
+        }
     };
 
     const handleTimeSelect = (time) => {
@@ -68,6 +71,11 @@ const MoviePage = () => {
         return date1.getDate() === date2.getDate() && 
                date1.getMonth() === date2.getMonth() && 
                date1.getFullYear() === date2.getFullYear();
+    };
+
+    // Helper function to check if date is selectable (first 4 days)
+    const isDateSelectable = (index) => {
+        return index < 4;
     };
 
     return (
@@ -92,13 +100,13 @@ const MoviePage = () => {
             <div className='flex justify-around pb-4 text-gray-400 font-bold mx-50'>
                 <button 
                     onClick={handleClick} 
-                    className={`${isSelected ? "text-gray-200" : "text-gray-400"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}
+                    className={`${isSelected ? "text-gray-100 border-b-2" : "text-gray-500 hover:cursor-pointer hover:bg-gray-800"} py-2 w-full`}
                 >
                     SYNOPSIS
                 </button>
                 <button 
                     onClick={handleClick} 
-                    className={`${isSelected ? "text-gray-400" : "text-gray-200"} py-2 rounded-lg hover:cursor-pointer hover:bg-gray-800 w-full`}
+                    className={`${isSelected ? "text-gray-500 hover:cursor-pointer hover:bg-gray-800" : "text-gray-100 border-b-2"} py-2 w-full`}
                 >
                     SCHEDULE
                 </button>
@@ -109,19 +117,21 @@ const MoviePage = () => {
             ) : (
                 <div className='mx-50'>
                     {/* Date Selection */}
-                    <div className="flex gap-2 overflow-x-auto pb-4 custom-scrollbar">
+                    <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
                         {getShowDates().map((day, index) => (
                             <button
                                 key={index}
-                                onClick={() => handleDateSelect(day.full)}
+                                onClick={() => handleDateSelect(day.full, index)}
+                                disabled={!isDateSelectable(index)}
                                 className={`flex flex-col items-center min-w-[80px] p-2 rounded-lg border 
-                                    ${selectedDate && isSameDate(selectedDate, day.full)
-                                        ? 'bg-yellow-400 text-gray-900 border-yellow-400' 
-                                        : 'border-gray-700 hover:border-yellow-400'}`}
+                                    ${!isDateSelectable(index) 
+                                        ? 'opacity-50 border-gray-700 text-gray-500 border-2' 
+                                        : selectedDate && isSameDate(selectedDate, day.full)
+                                            ? 'bg-yellow-400 text-gray-900 border-yellow-400' 
+                                            : 'border-gray-700 hover:border-yellow-400 hover:cursor-pointer'}`}
                             >
-                                <span className="text-sm">{day.day}</span>
-                                <span className="text-lg font-bold">{day.date}</span>
-                                <span className="text-sm">{day.month}</span>
+                                <span className="text-sm">{day.date} {day.month}</span>
+                                <span className="font-bold">{day.day}</span>
                             </button>
                         ))}
                     </div>
@@ -147,14 +157,14 @@ const MoviePage = () => {
                         </div>
                     )}
 
-                    {/* Book Button */}
-                    {selectedDate && selectedTime && (
-                        <div className="mt-6">
-                            <button className="w-full bg-yellow-400 text-gray-900 py-3 rounded-lg font-bold hover:bg-yellow-500">
-                                Book Tickets
-                            </button>
-                        </div>
-                    )}
+                    <div className="mt-6">
+                        <button className= {`w-full py-3 rounded-lg font-bold
+                            ${!selectedTime 
+                            ? 'opacity-50 border-gray-700 text-gray-500 border-2' 
+                            : 'bg-yellow-400 text-gray-900 hover:bg-yellow-500'}`}>
+                            Book Tickets
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

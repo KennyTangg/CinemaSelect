@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const MoviePage = () => {
     const [movies, setMovies] = useState([]);
+    const [cinemas, setCinemas] = useState([]);
     const [isSelected, setSelected] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -42,8 +43,20 @@ const MoviePage = () => {
                 setLoading(false);
             }
         };
+        const fetchCinemas = async () => {
+            try{
+                const response = await axios.get('/api/cinemas');
+                setCinemas(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching cinemas data: ", error);
+                setError(error.message);
+                setLoading(false);
+            }
+        };
 
         fetchMovies();
+        fetchCinemas();
     }, []);
 
     if (loading) return <div>Loading...</div>;
@@ -55,7 +68,6 @@ const MoviePage = () => {
     };
 
     const handleDateSelect = (date, index) => {
-        // Only allow selection for first 4 days
         if (index < 4) {
             setSelectedDate(date);
             setSelectedTime(null);
@@ -66,14 +78,12 @@ const MoviePage = () => {
         setSelectedTime(time);
     };
 
-    // Helper function to check if two dates are the same
     const isSameDate = (date1, date2) => {
         return date1.getDate() === date2.getDate() && 
                date1.getMonth() === date2.getMonth() && 
                date1.getFullYear() === date2.getFullYear();
     };
 
-    // Helper function to check if date is selectable (first 4 days)
     const isDateSelectable = (index) => {
         return index < 4;
     };
@@ -128,10 +138,10 @@ const MoviePage = () => {
                                         ? 'opacity-50 border-gray-700 text-gray-500 border-2' 
                                         : selectedDate && isSameDate(selectedDate, day.full)
                                             ? 'bg-yellow-400 text-gray-900 border-yellow-400' 
-                                            : 'border-gray-700 hover:border-yellow-400 hover:cursor-pointer'}`}
+                                            : 'border-gray-700 hover:border-yellow-400 border-2 hover:cursor-pointer'}`}
                             >
-                                <span className="text-sm">{day.date} {day.month}</span>
-                                <span className="font-bold">{day.day}</span>
+                                <span className="text-xs">{day.date} {day.month}</span>
+                                <span className="text-sm font-bold">{day.day}</span>
                             </button>
                         ))}
                     </div>
@@ -157,7 +167,7 @@ const MoviePage = () => {
                         </div>
                     )}
 
-                    <div className="mt-6">
+                    <div className="my-6">
                         <button className= {`w-full py-3 rounded-lg font-bold
                             ${!selectedTime 
                             ? 'opacity-50 border-gray-700 text-gray-500 border-2' 

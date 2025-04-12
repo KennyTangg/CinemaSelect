@@ -8,8 +8,9 @@
         box-sizing:border-box;
     }
     
-    html{
-        background: linear-gradient(to bottom, #0f172a, #0a0b10);
+    html, body{
+        min-height: 100vh;
+        background: linear-gradient(to bottom, #0f172a, #111827);
         color:white;
         font-family: "Poppins";
     }

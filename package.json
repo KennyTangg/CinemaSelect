@@ -24,11 +24,10 @@
   },
   "homepage": "https://github.com/KennyTangg/CinemaSelect#readme",
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "react-helmet": "^6.1.0"
   },
   "engines": {
     "node": ">=16.20.1"
   }
 }
-
-

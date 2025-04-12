@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
@@ -8,7 +8,10 @@ import MoviePage from './pages/MoviePage';
 
 const App = () => {
   return (
-    <>
+    <div className="min-h-screen bg-gray-900">
+      <Helmet>
+        <title>Cinema Select</title>
+      </Helmet>
       <BrowserRouter>
         <main>
           <Routes>
@@ -21,7 +24,7 @@ const App = () => {
           </Routes>
         </main>
       </BrowserRouter>
-    </>
+    </div>
   )
 }
 

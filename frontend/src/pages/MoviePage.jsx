@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import CinemaTimeSlot from '../components/CinemaTimeSlot';
 
 const MoviePage = () => {
     const [movies, setMovies] = useState([]);
@@ -25,10 +26,6 @@ const MoviePage = () => {
         }
         return days;
     };
-
-    const showTimes = [
-        "10:00 AM", "12:30 PM", "3:00 PM", "5:30 PM", "8:00 PM", "10:30 PM"
-    ];
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -74,8 +71,12 @@ const MoviePage = () => {
         }
     };
 
-    const handleTimeSelect = (time) => {
-        setSelectedTime(time);
+    const handleTimeSelect = (type, time, price) => {
+        setSelectedTime({
+            type,
+            time,
+            price
+        });
     };
 
     const isSameDate = (date1, date2) => {
@@ -149,30 +150,64 @@ const MoviePage = () => {
                     {/* Show Times */}
                     {selectedDate && (
                         <div className="my-6">
-                            <h3 className="text-gray-200 mb-4">Available Shows</h3>
-                            <div className="grid grid-cols-3 gap-3">
-                                {showTimes.map((time, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => handleTimeSelect(time)}
-                                        className={`p-2 rounded-lg border 
-                                            ${selectedTime === time 
-                                                ? 'bg-yellow-400 text-gray-900 border-yellow-400' 
-                                                : 'border-gray-700 hover:border-yellow-400'}`}
-                                    >
-                                        {time}
-                                    </button>
+                            <h3 className="text-gray-200 mb-4 text-lg">Available Ticket</h3>
+                            <div className='flex flex-col gap-6'>
+                                {cinemas.map((cinema, index) => (
+                                    <div key={index} className='rounded-2xl px-10 p-6 bg-gray-900 border-2 border-gray-800 shadow-lg shadow-gray-950'>
+                                        <h1 className='font-bold text-lg'>{cinema.placeName}</h1>
+                                        <p className='text-xs text-gray-500'>{cinema.location}</p>
+                                        
+                                        <CinemaTimeSlot 
+                                            type="2D"
+                                            price={cinema.price2D}
+                                            times={cinema.timeRegular2D}
+                                            onTimeSelect={handleTimeSelect}
+                                        />
+
+                                        <CinemaTimeSlot 
+                                            type="IMAX"
+                                            price={cinema.priceImax}
+                                            times={cinema.timeImax}
+                                            onTimeSelect={handleTimeSelect}
+                                        />
+                                        
+                                        <CinemaTimeSlot 
+                                            type="Velvet"
+                                            price={cinema.priceVelvet}
+                                            times={cinema.timeVelvet}
+                                            onTimeSelect={handleTimeSelect}
+                                        />
+
+                                        <CinemaTimeSlot 
+                                            type="Gold Class"
+                                            price={cinema.priceGoldClass}
+                                            times={cinema.timeGoldClass}
+                                            onTimeSelect={handleTimeSelect}
+                                        />
+
+                                        <CinemaTimeSlot 
+                                            type="Satin"
+                                            price={cinema.priceSatin}
+                                            times={cinema.timeSatin}
+                                            onTimeSelect={handleTimeSelect}
+                                        />
+                                    </div>
                                 ))}
                             </div>
                         </div>
                     )}
 
-                    <div className="my-6">
-                        <button className= {`w-full py-3 rounded-lg font-bold
-                            ${!selectedTime 
-                            ? 'opacity-50 border-gray-700 text-gray-500 border-2' 
-                            : 'bg-yellow-400 text-gray-900 hover:bg-yellow-500'}`}>
-                            Book Tickets
+                    <div className="mt-20">
+                        <button 
+                            className={`fixed bottom-0 left-0 w-full py-3 font-semibold text-xl
+                                ${!selectedTime 
+                                    ? 'bg-gray-900 border-t-4 border-gray-800  text-gray-400' 
+                                    : 'brightness-90 bg-yellow-400 text-gray-900 border-t-2'}`}
+                            disabled={!selectedTime}
+                        >
+                            {selectedTime 
+                                ? `Book ${selectedTime.type} - ${selectedTime.time} (${selectedTime.price})`
+                                : 'Book Tickets'}
                         </button>
                     </div>
                 </div>

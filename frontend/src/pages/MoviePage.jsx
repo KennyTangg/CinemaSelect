@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CinemaTimeSlot from '../components/CinemaTimeSlot';
+import CinemaLogo from '../components/CinemaLogo';
 
 const MoviePage = () => {
     const [movies, setMovies] = useState([]);
@@ -154,7 +155,10 @@ const MoviePage = () => {
                             <div className='flex flex-col gap-6'>
                                 {cinemas.map((cinema, index) => (
                                     <div key={index} className='rounded-2xl px-10 p-6 bg-gray-900 border-2 border-gray-800 shadow-lg shadow-gray-950'>
-                                        <h1 className='font-bold text-lg'>{cinema.placeName}</h1>
+                                        <span className='flex justify-between'>
+                                            <h1 className='font-bold text-lg'>{cinema.placeName}</h1>
+                                            <CinemaLogo placeName={cinema.placeName}/>
+                                        </span>
                                         <p className='text-xs text-gray-500'>{cinema.location}</p>
                                         
                                         <CinemaTimeSlot 
@@ -201,8 +205,8 @@ const MoviePage = () => {
                         <button 
                             className={`fixed bottom-0 left-0 w-full py-3 font-semibold text-xl
                                 ${!selectedTime 
-                                    ? 'bg-gray-900 border-t-4 border-gray-800  text-gray-400' 
-                                    : 'brightness-90 bg-yellow-400 text-gray-900 border-t-2'}`}
+                                    ? 'bg-gray-800 text-gray-400' 
+                                    : 'bg-yellow-400 text-gray-900 border-t-2'}`}
                             disabled={!selectedTime}
                         >
                             {selectedTime 

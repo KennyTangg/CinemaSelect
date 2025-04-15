@@ -14,7 +14,7 @@ const movies = [
         releaseDate: "2014-11-07",
         rating: 8.7,
         posterPath: "/movie-poster-1.jpg",
-        path: "/interstellar",
+        path: "interstellar",
         trailer: "https://www.youtube.com/watch?v=2LqzF5WauAw"
     },
     {
@@ -26,7 +26,7 @@ const movies = [
         releaseDate: "2018-12-12",
         rating: 8.4,
         posterPath: "/movie-poster-2.jpg",
-        path: "/spiderman",
+        path: "spiderman",
         trailer: "https://www.youtube.com/watch?v=g4Hbz2jLxvQ"
     },
     {
@@ -38,7 +38,7 @@ const movies = [
         releaseDate: "2018-04-27",
         rating: 8.4,
         posterPath: "/movie-poster-3.jpg",
-        path: "/avengers",
+        path: "avengers",
         trailer: "https://www.youtube.com/watch?v=6ZfuNTqbHE8"
     },
     {
@@ -50,7 +50,7 @@ const movies = [
         releaseDate: "1994-10-14",
         rating: 9.3,
         posterPath: "/movie-poster-4.jpg",
-        path: "/shawshank",
+        path: "shawshank",
         trailer: "https://www.youtube.com/watch?v=NmzuHjWmXOc"
     },
     {
@@ -62,7 +62,7 @@ const movies = [
         releaseDate: "2023-07-21",
         rating: 8.5,
         posterPath: "/movie-poster-5.jpg",
-        path: "/oppenheimer",
+        path: "oppenheimer",
         trailer: "https://www.youtube.com/watch?v=uYPbbksJxIg"
     },
     {
@@ -74,7 +74,7 @@ const movies = [
         releaseDate: "2022-05-27",
         rating: 8.3,
         posterPath: "/movie-poster-6.jpg",
-        path: "/maverick",
+        path: "maverick",
         trailer: "https://www.youtube.com/watch?v=giXco2jaZ_4"
     },
     {
@@ -86,7 +86,7 @@ const movies = [
         releaseDate: "2019-10-04",
         rating: 8.4,
         posterPath: "/movie-poster-7.jpg",
-        path: "/joker",
+        path: "joker",
         trailer: "https://www.youtube.com/watch?v=zAGVQLHvwOY"
     }
 ];

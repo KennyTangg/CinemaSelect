@@ -1,11 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CinemaTimeSlot from '../components/CinemaTimeSlot';
 import CinemaLogo from '../components/CinemaLogo';
 
 const MoviePage = () => {
-    const [movies, setMovies] = useState([]);
+    const { path } = useParams();
+    const [movie, setMovie] = useState(null);
     const [cinemas, setCinemas] = useState([]);
     const [isSelected, setSelected] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -29,37 +31,29 @@ const MoviePage = () => {
     };
 
     useEffect(() => {
-        const fetchMovies = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get('/api/movies');
-                setMovies(response.data);
+                const movieResponse = await axios.get(`/api/movies/${path}`);
+                setMovie(movieResponse.data);
+                
+                const cinemasResponse = await axios.get('/api/cinemas');
+                setCinemas(cinemasResponse.data);
+                
                 setLoading(false);
                 setSelectedDate(getShowDates()[0].full);
             } catch (error) {
-                console.error("Error fetching movies data: ", error);
-                setError(error.message);
-                setLoading(false);
-            }
-        };
-        const fetchCinemas = async () => {
-            try{
-                const response = await axios.get('/api/cinemas');
-                setCinemas(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching cinemas data: ", error);
+                console.error("Error fetching data: ", error);
                 setError(error.message);
                 setLoading(false);
             }
         };
 
-        fetchMovies();
-        fetchCinemas();
-    }, []);
+        fetchData();
+    }, [path]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-    if (!movies.length) return <div>No movies found</div>;
+    if (!movie) return <div>Movie not found</div>;
 
     const handleClick = () => {
         setSelected(!isSelected);
@@ -94,19 +88,19 @@ const MoviePage = () => {
         <div className='min-h-screen bg-gray-900'>
             <div className='flex justify-center bg-gray-950'>
                 <iframe 
-                    src={movies[0].trailer.replace("watch?v=", "embed/")}
-                    title={movies[0].title}
+                    src={movie.trailer.replace("watch?v=", "embed/")}
+                    title={movie.title}
                     className="w-full max-w-2xl h-64"
                     allowFullScreen
                 ></iframe>
             </div>
             <section className='flex gap-8 sm:mx-50'>
-                <img src={movies[0].posterPath} className='relative bottom-10 w-35 sm:w-48 rounded-lg' alt={movies[0].title} />
+                <img src={movie.posterPath} className='relative bottom-10 w-35 sm:w-48 rounded-lg' alt={movie.title} />
                 <div className='text-gray-400 space-y-1 w-full'>
-                    <h1 className='text-2xl pt-8 font-bold text-gray-200'>{movies[0].title}</h1>
-                    <p>Genre : <span className='pl-10 text-gray-200'>{movies[0].genre}</span></p>
-                    <p>Duration : <span className='pl-5 text-gray-200'>{movies[0].duration} minutes</span></p>
-                    <p>Director : <span className='pl-6 text-gray-200'>{movies[0].director}</span></p>
+                    <h1 className='text-2xl pt-8 font-bold text-gray-200'>{movie.title}</h1>
+                    <p>Genre : <span className='pl-10 text-gray-200'>{movie.genre}</span></p>
+                    <p>Duration : <span className='pl-5 text-gray-200'>{movie.duration} minutes</span></p>
+                    <p>Director : <span className='pl-6 text-gray-200'>{movie.director}</span></p>
                 </div>               
             </section>
             <div className='flex justify-around pb-4 text-gray-400 font-bold mx-50'>
@@ -125,7 +119,7 @@ const MoviePage = () => {
             </div>
             
             {isSelected ? (
-                <p className='mx-50'>{movies[0].synopsis}</p>
+                <p className='mx-50'>{movie.synopsis}</p>
             ) : (
                 <div className='mx-50'>
                     {/* Date Selection */}
@@ -202,8 +196,9 @@ const MoviePage = () => {
                     )}
 
                     <div className="mt-20">
-                        <button 
-                            className={`fixed bottom-0 left-0 w-full py-3 font-semibold text-xl
+                        {!selectedTime
+                        ? <button 
+                            className={`fixed bottom-0 left-0 w-full py-3 font-semibold text-xl hover:cursor-pointer
                                 ${!selectedTime 
                                     ? 'bg-gray-800 text-gray-400' 
                                     : 'bg-yellow-400 text-gray-900 border-t-2'}`}
@@ -213,6 +208,19 @@ const MoviePage = () => {
                                 ? `Book ${selectedTime.type} - ${selectedTime.time} (${selectedTime.price})`
                                 : 'Book Tickets'}
                         </button>
+                        : <Link to='/payment'>
+                            <button 
+                                className={`fixed bottom-0 left-0 w-full py-3 font-semibold text-xl hover:cursor-pointer
+                                    ${!selectedTime 
+                                        ? 'bg-gray-800 text-gray-400' 
+                                        : 'bg-yellow-400 text-gray-900 border-t-2'}`}
+                                disabled={!selectedTime}
+                            >
+                                {selectedTime 
+                                    ? `Book ${selectedTime.type} - ${selectedTime.time} (${selectedTime.price})`
+                                    : 'Book Tickets'}
+                            </button>
+                        </Link> }
                     </div>
                 </div>
             )}

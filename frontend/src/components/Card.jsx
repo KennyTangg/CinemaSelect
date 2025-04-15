@@ -17,7 +17,7 @@ const Card = () => {
         const response = await axios.get('/api/movies');
         setMovies(response.data);
         setLoading(false);
-      } catch (err) {
+      } catch (error) {
         setError('Failed to fetch movies');
         setLoading(false);
       }
@@ -42,13 +42,16 @@ const Card = () => {
         : 'flex overflow-x-auto space-x-10 py-4 px-2 lg:px-0 custom-scrollbar pb-10'}`}>
         {isHomePage 
           ? displayedMovies.map((movie) => (
-            <span key={movie._id} className='flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5'>
+            <span className='flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5'>
               <img src={movie.posterPath} alt={movie.title} className='rounded-3xl w-35 xl:w-62 sm:w-52'/>
               <h5 className='text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base select-none'>{movie.title}</h5>
             </span>
           )) 
           : movies.map((movie) => (
-            <Link to={movie.path} key={movie._id} className='flex-shrink-0 relative flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5 group hover:cursor-pointer'>
+            <Link 
+              to={`/main/${movie.path}`} 
+              className='flex-shrink-0 relative flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5 group hover:cursor-pointer'
+            >
               <img src={movie.posterPath} alt={movie.title} className='rounded-xl sm:w-50'/>
               <div className="absolute bottom-15 rounded-xl sm:w-50 inset-0 bg-gradient-to-b from-transparent to-black opacity-850 group-hover:block hidden z-10"></div>
               <button className='absolute bottom-20 text-sm font-semibold bg-gray-800 text-yellow-400 px-8 py-2 rounded-lg group-hover:block hidden z-10 hover:cursor-pointer'>Book Ticket</button>

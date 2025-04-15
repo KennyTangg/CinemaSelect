@@ -19,7 +19,7 @@ const App = () => {
             <Route path="/login" element={<AuthPage />} />
             <Route path="/signup" element={<AuthPage />} />
             <Route path="/main" element={<MainPage />} />
-            <Route path="/movie" element={<MoviePage />} />
+            <Route path="/main/:path" element={<MoviePage />} />
             <Route path="*" element={<h1 className="flex items-center justify-center min-h-screen text-3xl">404: Page Not Found</h1>} />
           </Routes>
         </main>

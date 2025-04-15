@@ -38,7 +38,6 @@ const CinemaPage = () => {
                 onToggle={handleSidebarToggle}
             />
             <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
-                {/* Top Navigation */}
                 <nav className="bg-gray-800 px-8 py-4 flex items-center justify-between">
                     <div className="relative">
                         <input
@@ -63,7 +62,6 @@ const CinemaPage = () => {
                     </div>
                 </nav>
 
-                {/* Cinema Content */}
                 <div className="px-10 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Available Cinemas</h2>
                     <div className="grid grid-cols-3 gap-6">
@@ -110,6 +108,7 @@ const CinemaPage = () => {
                             </div>
                         ))}
                     </div>
+                    <h1 className='mt-7 py-2 rounded-lg text-center font-bold text-gray-500 border-2'>More Cinema Coming Soon</h1>
                 </div>
             </div>
         </div>

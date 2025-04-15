@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CinemaTimeSlot from '../components/CinemaTimeSlot';
 import CinemaLogo from '../components/CinemaLogo';
@@ -15,6 +15,7 @@ const MoviePage = () => {
     const [error, setError] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
+    const navigate = useNavigate();
 
     const getShowDates = () => {
         const days = [];
@@ -67,12 +68,29 @@ const MoviePage = () => {
         }
     };
 
-    const handleTimeSelect = (type, time, price) => {
+    const handleTimeSelect = (type, time, price, cinema) => {
         setSelectedTime({
             type,
             time,
-            price
+            price,
+            cinema
         });
+    };
+
+    const handleBooking = () => {
+        if (!selectedTime || !selectedDate) return;
+        
+        const bookingData = {
+            movieTitle: movie.title,
+            moviePoster: movie.posterPath,
+            cinema: selectedTime.cinema,
+            date: selectedDate,
+            time: selectedTime.time,
+            type: selectedTime.type,
+            price: selectedTime.price
+        };
+
+        navigate('/payment', { state: bookingData });
     };
 
     const isSameDate = (date1, date2) => {
@@ -167,6 +185,7 @@ const MoviePage = () => {
                                             price={cinema.price2D}
                                             times={cinema.timeRegular2D}
                                             onTimeSelect={handleTimeSelect}
+                                            cinema={cinema.placeName}
                                         />
 
                                         <CinemaTimeSlot 
@@ -174,6 +193,7 @@ const MoviePage = () => {
                                             price={cinema.priceImax}
                                             times={cinema.timeImax}
                                             onTimeSelect={handleTimeSelect}
+                                            cinema={cinema.placeName}
                                         />
                                         
                                         <CinemaTimeSlot 
@@ -181,6 +201,7 @@ const MoviePage = () => {
                                             price={cinema.priceVelvet}
                                             times={cinema.timeVelvet}
                                             onTimeSelect={handleTimeSelect}
+                                            cinema={cinema.placeName}
                                         />
 
                                         <CinemaTimeSlot 
@@ -188,6 +209,7 @@ const MoviePage = () => {
                                             price={cinema.priceGoldClass}
                                             times={cinema.timeGoldClass}
                                             onTimeSelect={handleTimeSelect}
+                                            cinema={cinema.placeName}
                                         />
 
                                         <CinemaTimeSlot 
@@ -195,6 +217,7 @@ const MoviePage = () => {
                                             price={cinema.priceSatin}
                                             times={cinema.timeSatin}
                                             onTimeSelect={handleTimeSelect}
+                                            cinema={cinema.placeName}
                                         />
                                     </div>
                                 ))}
@@ -203,8 +226,8 @@ const MoviePage = () => {
                     )}
 
                     <div className="mt-20">
-                        {!selectedTime
-                        ? <button 
+                        <button 
+                            onClick={handleBooking}
                             className={`fixed bottom-0 left-0 w-full py-3 font-semibold text-xl hover:cursor-pointer
                                 ${!selectedTime 
                                     ? 'bg-gray-800 text-gray-400' 
@@ -215,19 +238,6 @@ const MoviePage = () => {
                                 ? `Book ${selectedTime.type} - ${selectedTime.time} (${selectedTime.price})`
                                 : 'Book Tickets'}
                         </button>
-                        : <Link to='/payment'>
-                            <button 
-                                className={`fixed bottom-0 left-0 w-full py-3 font-semibold text-xl hover:cursor-pointer
-                                    ${!selectedTime 
-                                        ? 'bg-gray-800 text-gray-400' 
-                                        : 'bg-yellow-400 text-gray-900 border-t-2'}`}
-                                disabled={!selectedTime}
-                            >
-                                {selectedTime 
-                                    ? `Book ${selectedTime.type} - ${selectedTime.time} (${selectedTime.price})`
-                                    : 'Book Tickets'}
-                            </button>
-                        </Link> }
                     </div>
                 </div>
             )}

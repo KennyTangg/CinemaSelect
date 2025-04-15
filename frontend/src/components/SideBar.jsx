@@ -15,15 +15,15 @@ import {
 const SideBar = ({ isOpen, onToggle }) => {
     const items = [
         { icon: <Home />, label: 'Home', path: '/main' },
-        { icon: <LocalMovies />, label: 'Cinemas', path: 'cinemas' },
-        { icon: <ConfirmationNumber />, label: 'My Tickets', path: 'tickets' },
-        { icon: <Event />, label: 'Upcoming Shows', path: 'upcoming' },
-        { icon: <History />, label: 'Booking History', path: 'history' },
+        { icon: <LocalMovies />, label: 'Cinemas', path: '/cinemas' },
+        { icon: <ConfirmationNumber />, label: 'My Tickets', path: '/tickets' },
+        { icon: <Event />, label: 'Upcoming Shows', path: '/upcoming' },
+        { icon: <History />, label: 'Booking History', path: '/history' },
     ];
 
     const bottomItems = [
-        { icon: <Settings />, label: 'Settings', path: 'settings' },
-        { icon: <Help />, label: 'Help & Support', path: 'help' },
+        { icon: <Settings />, label: 'Settings', path: '/settings' },
+        { icon: <Help />, label: 'Help & Support', path: '/help' },
     ];
 
 

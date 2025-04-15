@@ -1,89 +1,28 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
-    Home,
-    LocalMovies,
-    ConfirmationNumber,
     AccountCircle,
     Notifications,
     ExitToApp,
-    Search,
-    Event,
-    History,
-    Settings,
-    Help,
-    Menu,
-    Close
+    Search
 } from '@mui/icons-material';
 import Card from '../components/Card';
+import SideBar from '../components/SideBar';
 
 const MainPage = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-    const sidebarItems = [
-        { icon: <Home />, label: 'Home', path: '/main' },
-        { icon: <LocalMovies />, label: 'Cinemas', path: '/cinemas' },
-        { icon: <ConfirmationNumber />, label: 'My Tickets', path: '/tickets' },
-        { icon: <Event />, label: 'Upcoming Shows', path: '/upcoming' },
-        { icon: <History />, label: 'Booking History', path: '/history' },
-    ];
-
-    const bottomSidebarItems = [
-        { icon: <Settings />, label: 'Settings', path: '/settings' },
-        { icon: <Help />, label: 'Help & Support', path: '/help' },
-    ];
+    const handleSidebarToggle = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
 
     return (
         <div className="flex min-h-screen bg-gray-900">
-            {/* Sidebar */}
-            <div className={`${isSidebarOpen ? 'w-60' : 'w-20'} bg-gray-800 text-white transition-all duration-300 fixed h-full`}>
-                <div className="px-6 py-4 flex items-center justify-between">
-                    {isSidebarOpen ? (
-                        <h1 className="text-lg font-medium text-yellow-400"><span className='text-white'>Cinema</span> Select</h1>
-                    ) : (
-                        ''
-                    )}
-                    <button 
-                        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                        className={`text-gray-300 hover:text-yellow-400 ${isSidebarOpen ? 'grow-0' : 'grow-1'}`}
-                    >
-                        {isSidebarOpen ? <Close /> : <Menu />}
-                    </button>
-                </div>
-
-                {/* Main Navigation Items */}
-                <div className="px-4 py-2">
-                    {sidebarItems.map((item, index) => (
-                        <Link 
-                            key={index} 
-                            to={item.path}
-                            className="flex items-center text-sm space-x-4 text-gray-300 hover:text-yellow-400 hover:bg-gray-700 rounded-lg p-3 mb-1 transition-colors duration-300"
-                        >
-                            {item.icon}
-                            {isSidebarOpen && <span>{item.label}</span>}
-                        </Link>
-                    ))}
-                </div>
-
-                {/* Bottom Navigation Items */}
-                <div className="absolute w-full bottom-0 p-4 border-gray-700">
-                    {bottomSidebarItems.map((item, index) => (
-                        <Link 
-                            key={index} 
-                            to={item.path}
-                            className="flex items-center text-sm space-x-4 text-gray-300 hover:text-yellow-400 hover:bg-gray-700 rounded-lg p-3 mb-1 transition-colors duration-300"
-                        >
-                            {item.icon}
-                            {isSidebarOpen && <span>{item.label}</span>}
-                        </Link>
-                    ))}
-                </div>
-            </div>
-
-            {/* Main Content */}
+            <SideBar 
+                isOpen={isSidebarOpen}
+                onToggle={handleSidebarToggle}
+            />
             <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
-                {/* Top Navigation */}
                 <nav className="bg-gray-800 px-8 py-4 flex items-center justify-between">
                     <div className="relative">
                         <input
@@ -108,9 +47,7 @@ const MainPage = () => {
                     </div>
                 </nav>
 
-                {/* Page Content */}
                 <div className="px-10 py-8">
-                    {/* Featured Section */}
                     <section className="mb-12">
                         <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Featured Movies</h2>
                         <div>

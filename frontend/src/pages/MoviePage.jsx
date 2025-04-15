@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CinemaTimeSlot from '../components/CinemaTimeSlot';
 import CinemaLogo from '../components/CinemaLogo';
+import { ArrowBack } from '@mui/icons-material';
 
 const MoviePage = () => {
     const { path } = useParams();
@@ -86,6 +87,12 @@ const MoviePage = () => {
 
     return (
         <div className='min-h-screen bg-gray-900'>
+            <Link to="/main">
+                <button className='flex gap-2.5 sm:bg-gray-800 sm:text-gray-500 font-semibold px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer'> 
+                    <ArrowBack /> 
+                    <h2>Back</h2>
+                </button>
+            </Link>
             <div className='flex justify-center bg-gray-950'>
                 <iframe 
                     src={movie.trailer.replace("watch?v=", "embed/")}

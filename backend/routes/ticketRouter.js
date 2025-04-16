@@ -1,6 +1,7 @@
 const express = require('express');
 const ticketRouter = express.Router();
 const Ticket = require('../models/ticket');
+const protect = require('../middleware/validateToken');
 
 ticketRouter.get("/",  async (req,res) => {
     try{
@@ -76,17 +77,42 @@ ticketRouter.patch("/:ticketId/status", async (req,res) => {
     }
 });
 
-ticketRouter.post("/add", async (req,res) => {
-    try{
+ticketRouter.post("/add", protect, async (req, res) => {
+    try {
         const { movieTitle, moviePoster, cinemaName, showDate, showTime, seats, screenType, price } = req.body;
+
+        if (!movieTitle || !moviePoster || !cinemaName || !showDate || !showTime || !seats || !screenType || !price) {
+            return res.status(400).json({ 
+                message: "All fields are required" 
+            });
+        }
+
         const ticket = new Ticket({
-            movieTitle, moviePoster, cinemaName, showDate, showTime, seats, screenType, price,
-            userId: req.user.id
-        })
+            movieTitle,
+            moviePoster,
+            cinemaName,
+            showDate: new Date(showDate),
+            showTime,
+            seats,
+            screenType,
+            price,
+            userId: req.user.id,
+            status: 'active'
+        });
+
         const savedTicket = await ticket.save();
-        res.status(201).json(savedTicket);
-    } catch(error){
-        return res.status(500).json({ message: error.message});
+        
+        res.status(201).json({
+            message: "Ticket created successfully",
+            ticketId: savedTicket.ticketId,
+            ticket: savedTicket
+        });
+    } catch (error) {
+        console.error('Ticket creation error:', error);
+        return res.status(500).json({ 
+            message: "Failed to create ticket",
+            error: error.message 
+        });
     }
 })
 

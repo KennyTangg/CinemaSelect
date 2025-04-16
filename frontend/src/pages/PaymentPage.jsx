@@ -1,6 +1,8 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
+import axios from 'axios';
+import SuccessModal from '../components/SuccessModal';
 
 const PaymentPage = () => {
     const navigate = useNavigate();
@@ -8,16 +10,12 @@ const PaymentPage = () => {
     const bookingData = location.state;
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [ticketId, setTicketId] = useState(null);
     const ticketPrice = parseInt(bookingData.price.replace(/[^0-9]/g, ''));
     
     const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
     const seatsPerRow = 20;
-
-    useEffect(() => {
-        if (!bookingData) {
-            navigate('/main');
-        }
-    }, [bookingData, navigate]);
 
     const occupiedSeats = [
         'F4', 'F5', 'F12', 'F13', 'F14',
@@ -74,6 +72,37 @@ const PaymentPage = () => {
             return `${baseStyles} bg-yellow-400 text-gray-900 hover:bg-yellow-500`;
         }
         return `${baseStyles} bg-gray-700 text-gray-300 hover:bg-gray-600`;
+    };
+
+    const handlePayment = async () => {
+        try {
+            const ticketData = {
+                movieTitle: bookingData.movieTitle,
+                moviePoster: bookingData.moviePoster,
+                cinemaName: bookingData.cinema,
+                showDate: new Date(bookingData.date).toISOString(),
+                showTime: bookingData.time,
+                seats: selectedSeats,
+                screenType: bookingData.type,
+                price: (ticketPrice + 3000) * selectedSeats.length,
+                paymentMethod: paymentMethod
+            };
+
+            const token = localStorage.getItem('token');
+            const response = await axios.post('/api/tickets/add', ticketData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 201) {
+                setTicketId(response.data.ticketId);
+                setIsModalOpen(true);
+            }
+        } catch (error) {
+            console.error('Booking error:', error);
+            alert(error.response?.data?.message || 'Failed to book tickets. Please try again.');
+        }
     };
 
     return (
@@ -198,6 +227,7 @@ const PaymentPage = () => {
                     </div>
 
                     <button 
+                        onClick={handlePayment}
                         disabled={selectedSeats.length === 0 || !paymentMethod}
                         className={`w-full py-3 rounded-lg font-bold text-base
                             ${selectedSeats.length > 0 && paymentMethod
@@ -210,6 +240,11 @@ const PaymentPage = () => {
                     </button>
                 </div>
             </div>
+            <SuccessModal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                ticketId={ticketId}
+            />
         </div>
     );
 };

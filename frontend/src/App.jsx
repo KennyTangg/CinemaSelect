@@ -7,6 +7,8 @@ import MainPage from './pages/MainPage';
 import MoviePage from './pages/MoviePage';
 import CinemaPage from './pages/CinemaPage';
 import PaymentPage from './pages/PaymentPage';
+import TicketPage from './pages/TicketPage';
+// TicketSuccessPage import removed
 
 const App = () => {
   return (
@@ -24,6 +26,7 @@ const App = () => {
             <Route path="/main/:path" element={<MoviePage />} />
             <Route path="/cinemas" element={<CinemaPage />} />
             <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/tickets" element={<TicketPage />} />
             <Route path="*" element={<h1 className="flex items-center justify-center min-h-screen text-3xl">404: Page Not Found</h1>} />
           </Routes>
         </main>

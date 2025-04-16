@@ -1,11 +1,14 @@
 const express = require('express');
 const ticketRouter = express.Router();
 const Ticket = require('../models/ticket');
-const protect = require('../middleware/validateToken');
+const authentication = require('../middleware/validateToken');
 
-ticketRouter.get("/",  async (req,res) => {
+ticketRouter.get("/", authentication ,async (req,res) => {
     try{
-        const tickets = await Ticket.find({ userId: req.user.id });
+        const tickets = await Ticket.find({ 
+            userId: req.user.id,
+            status: 'active' 
+        });
         if(!tickets.length){
             return res.status(404).json({ message: "Tickets not found" })
         }
@@ -15,7 +18,7 @@ ticketRouter.get("/",  async (req,res) => {
     }
 });
 
-ticketRouter.get("/:ticketId", async (req,res) => {
+ticketRouter.get("/:ticketId", authentication, async (req,res) => {
     try{
         const ticket = await Ticket.findOne({
             ticketId: req.params.ticketId,
@@ -31,7 +34,7 @@ ticketRouter.get("/:ticketId", async (req,res) => {
     }
 })
 
-ticketRouter.delete("/:ticketId", async (req,res) => {
+ticketRouter.delete("/:ticketId", authentication, async (req,res) => {
     try{
         const ticket = await Ticket.findOneAndUpdate(
             {
@@ -52,7 +55,7 @@ ticketRouter.delete("/:ticketId", async (req,res) => {
     }
 })
 
-ticketRouter.patch("/:ticketId/status", async (req,res) => {
+ticketRouter.patch("/:ticketId/status", authentication, async (req,res) => {
     try{
         const { status } = req.body;
         if (!["active", "used", "cancelled"].includes(status)){
@@ -77,15 +80,10 @@ ticketRouter.patch("/:ticketId/status", async (req,res) => {
     }
 });
 
-ticketRouter.post("/add", protect, async (req, res) => {
+ticketRouter.post("/add", authentication, async (req, res) => {
     try {
-        const { movieTitle, moviePoster, cinemaName, showDate, showTime, seats, screenType, price } = req.body;
-
-        if (!movieTitle || !moviePoster || !cinemaName || !showDate || !showTime || !seats || !screenType || !price) {
-            return res.status(400).json({ 
-                message: "All fields are required" 
-            });
-        }
+        const { movieTitle, moviePoster, cinemaName, showDate, 
+            showTime, seats, screenType, price, paymentMethod } = req.body;
 
         const ticket = new Ticket({
             movieTitle,
@@ -96,6 +94,7 @@ ticketRouter.post("/add", protect, async (req, res) => {
             seats,
             screenType,
             price,
+            paymentMethod,
             userId: req.user.id,
             status: 'active'
         });
@@ -116,7 +115,7 @@ ticketRouter.post("/add", protect, async (req, res) => {
     }
 })
 
-ticketRouter.get("/history", async (req,res) => {
+ticketRouter.get("/history", authentication, async (req,res) => {
     try {
         const tickets = await Ticket.find({
             userId: req.user.id,

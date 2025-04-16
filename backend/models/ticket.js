@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 const ticketSchema = new mongoose.Schema({
     movieTitle: {
@@ -31,11 +32,15 @@ const ticketSchema = new mongoose.Schema({
     },
     ticketId: {
         type: String,
-        required: true,
+        default: () => uuidv4(),
         unique: true
     },
     price: {
         type: Number,
+        required: true
+    },
+    paymentMethod: {
+        type: String,
         required: true
     },
     userId: {
@@ -48,6 +53,8 @@ const ticketSchema = new mongoose.Schema({
         enum: ['active', 'used', 'cancelled'],
         default: 'active'
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model("Ticket", ticketSchema);

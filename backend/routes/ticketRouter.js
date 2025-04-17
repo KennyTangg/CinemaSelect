@@ -1,12 +1,11 @@
 const express = require('express');
 const ticketRouter = express.Router();
 const Ticket = require('../models/ticket');
-const authentication = require('../middleware/validateToken');
+// const authentication = require('../middleware/validateToken'); // Comment out this line
 
-ticketRouter.get("/", authentication ,async (req,res) => {
+ticketRouter.get("/", async (req,res) => {
     try{
         const tickets = await Ticket.find({ 
-            userId: req.user.id,
             status: 'active' 
         });
         if(!tickets.length){
@@ -18,11 +17,23 @@ ticketRouter.get("/", authentication ,async (req,res) => {
     }
 });
 
-ticketRouter.get("/:ticketId", authentication, async (req,res) => {
+ticketRouter.get("/nonActive", async (req,res) => {
+    try {
+        const tickets = await Ticket.find({}).sort({ createdAt: -1 }); 
+        if(!tickets){
+            return res.status(404).json({ message: "No ticket found"})
+        }
+        res.json(tickets);
+    } catch (error){
+        console.error("History endpoint error:", error); 
+        return res.status(500).json({ message: error.message });
+    }
+});
+
+ticketRouter.get("/:ticketId", async (req,res) => {
     try{
         const ticket = await Ticket.findOne({
-            ticketId: req.params.ticketId,
-            userId: req.user.id
+            ticketId: req.params.ticketId
         });
         
         if(!ticket){
@@ -32,14 +43,13 @@ ticketRouter.get("/:ticketId", authentication, async (req,res) => {
     } catch(error){
         return res.status(500).json({ message: error.message });
     }
-})
+});
 
-ticketRouter.delete("/:ticketId", authentication, async (req,res) => {
+ticketRouter.delete("/:ticketId", async (req,res) => {
     try{
         const ticket = await Ticket.findOneAndUpdate(
             {
                 ticketId: req.params.ticketId,
-                userId: req.user.id,
                 status: "active"
             },
             { status: 'cancelled' },
@@ -53,9 +63,9 @@ ticketRouter.delete("/:ticketId", authentication, async (req,res) => {
     } catch(error){
         return res.status(500).json({ message: error.message });
     }
-})
+});
 
-ticketRouter.patch("/:ticketId/status", authentication, async (req,res) => {
+ticketRouter.patch("/:ticketId/status", async (req,res) => {
     try{
         const { status } = req.body;
         if (!["active", "used", "cancelled"].includes(status)){
@@ -64,8 +74,7 @@ ticketRouter.patch("/:ticketId/status", authentication, async (req,res) => {
 
         const ticket = await Ticket.findOneAndUpdate(
             { 
-                ticketId: req.params.ticketId,
-                userId: req.user.id
+                ticketId: req.params.ticketId
             }, 
             { status },
             { new: true }
@@ -80,7 +89,7 @@ ticketRouter.patch("/:ticketId/status", authentication, async (req,res) => {
     }
 });
 
-ticketRouter.post("/add", authentication, async (req, res) => {
+ticketRouter.post("/add", async (req, res) => {
     try {
         const { movieTitle, moviePoster, cinemaName, showDate, 
             showTime, seats, screenType, price, paymentMethod } = req.body;
@@ -95,7 +104,6 @@ ticketRouter.post("/add", authentication, async (req, res) => {
             screenType,
             price,
             paymentMethod,
-            userId: req.user.id,
             status: 'active'
         });
 
@@ -112,21 +120,6 @@ ticketRouter.post("/add", authentication, async (req, res) => {
             message: "Failed to create ticket",
             error: error.message 
         });
-    }
-})
-
-ticketRouter.get("/history", authentication, async (req,res) => {
-    try {
-        const tickets = await Ticket.find({
-            userId: req.user.id,
-            status: { $in: ['used', 'cancelled']}
-        })
-        if(!tickets.length){
-            return res.status(404).json({ message: "No ticket history found"});
-        }
-        res.json(tickets);
-    } catch (error){
-        return res.status(500).json({ message: error.message });
     }
 });
 

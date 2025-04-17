@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
@@ -8,7 +8,7 @@ import MoviePage from './pages/MoviePage';
 import CinemaPage from './pages/CinemaPage';
 import PaymentPage from './pages/PaymentPage';
 import TicketPage from './pages/TicketPage';
-// TicketSuccessPage import removed
+import HistoryPage from './pages/HistoryPage';
 
 const App = () => {
   return (
@@ -27,6 +27,7 @@ const App = () => {
             <Route path="/cinemas" element={<CinemaPage />} />
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/tickets" element={<TicketPage />} />
+            <Route path="/history" element={<HistoryPage />}  />
             <Route path="*" element={<h1 className="flex items-center justify-center min-h-screen text-3xl">404: Page Not Found</h1>} />
           </Routes>
         </main>

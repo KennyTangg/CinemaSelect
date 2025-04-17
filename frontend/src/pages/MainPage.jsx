@@ -7,10 +7,12 @@ import {
 } from '@mui/icons-material';
 import Card from '../components/Card';
 import SideBar from '../components/SideBar';
+import LogOutModal from '../components/LogOutModal';
 
 const MainPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleSidebarToggle = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -41,7 +43,10 @@ const MainPage = () => {
                         <button className="text-gray-300 hover:text-yellow-400">
                             <AccountCircle />
                         </button>
-                        <button className="text-gray-300 hover:text-yellow-400">
+                        <button 
+                            onClick={() => setIsModalOpen(true)} 
+                            className="text-gray-300 hover:text-yellow-400"
+                        >
                             <ExitToApp />
                         </button>
                     </div>
@@ -56,6 +61,10 @@ const MainPage = () => {
                     </section>
                 </div>
             </div>
+            <LogOutModal 
+                isOpen={isModalOpen}
+                setModalOpen={setIsModalOpen}
+            />
         </div>
     );
 };

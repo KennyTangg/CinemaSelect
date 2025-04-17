@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SideBar from '../components/SideBar';
+import LogOutModal from '../components/LogOutModal'
 import {
     Search,
     Notifications,
@@ -15,6 +16,7 @@ const TicketPage = () => {
     const [tickets, setTickets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchTickets = async () => {
@@ -136,7 +138,10 @@ const TicketPage = () => {
                         <button className="text-gray-300 hover:text-yellow-400">
                             <AccountCircle />
                         </button>
-                        <button className="text-gray-300 hover:text-yellow-400">
+                        <button 
+                            onClick={() => setIsModalOpen(true)} 
+                            className="text-gray-300 hover:text-yellow-400"
+                        >
                             <ExitToApp />
                         </button>
                     </div>
@@ -211,6 +216,10 @@ const TicketPage = () => {
                     )}
                 </div>
             </div>
+            <LogOutModal 
+                isOpen={isModalOpen}
+                setModalOpen={setIsModalOpen}
+            />
         </div>
     );
 };

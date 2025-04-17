@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SideBar from '../components/SideBar';
 import CinemaLogo from '../components/CinemaLogo';
+import LogOutModal from '../components/LogOutModal';
 import {
     Search,
     Notifications,
@@ -13,6 +14,7 @@ const CinemaPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [cinemas, setCinemas] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleSidebarToggle = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -56,7 +58,10 @@ const CinemaPage = () => {
                         <button className="text-gray-300 hover:text-yellow-400">
                             <AccountCircle />
                         </button>
-                        <button className="text-gray-300 hover:text-yellow-400">
+                        <button 
+                            onClick={() => setIsModalOpen(true)} 
+                            className="text-gray-300 hover:text-yellow-400"
+                        >
                             <ExitToApp />
                         </button>
                     </div>
@@ -111,6 +116,10 @@ const CinemaPage = () => {
                     <h1 className='mt-7 py-2 rounded-lg text-center font-bold text-gray-500 border-2'>More Cinema Coming Soon</h1>
                 </div>
             </div>
+            <LogOutModal 
+                isOpen={isModalOpen}
+                setModalOpen={setIsModalOpen}
+            />
         </div>
     );
 };

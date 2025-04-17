@@ -30,8 +30,8 @@ const Card = () => {
     setStartIndex((prevIndex) => (prevIndex + 1) % (movies.length - 3));
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="h-120 flex justify-center items-center font-semibold text-xl">Loading...</div>;
+  if (error) return <div className="h-120 flex justify-center items-center font-semibold text-xl">{error}</div>;
 
   const displayedMovies = movies.slice(startIndex, startIndex + 4);
 

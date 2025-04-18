@@ -56,7 +56,7 @@
                 @apply hidden sm:block text-sm px-4 cursor-pointer sm:text-base hover:text-gray-200;
             }
             .sign-up{
-                @apply border-2 border-gray-200 rounded-2xl px-4 py-1 mr-2 sm:mx-auto transition duration-300 hover:bg-gray-100 hover:text-gray-950 hover:border-gray-950;
+                @apply border-2  border-gray-200 rounded-xl px-4 py-1 mr-2 sm:mx-auto transition duration-300 hover:bg-gray-100 hover:text-gray-950 hover:border-gray-950;
             }
         }
     }
@@ -86,8 +86,8 @@
                         sm:text-xl sm:py-7;
                     }
                     button{
-                        @apply bg-yellow-400 text-gray-950 font-semibold px-10 py-2 rounded-2xl border-2  border-black cursor-pointer hover:bg-yellow-500
-                        sm:px-10 sm:py-2 sm:text-base sm:border-4 
+                        @apply bg-gradient-to-br from-yellow-300 to-yellow-500 text-gray-900 font-semibold px-10 py-2 rounded-2xl  cursor-pointer hover:bg-yellow-500
+                        sm:px-10 sm:py-2 sm:text-base 
                         xl:px-10 xl:py-3 xl:text-xl 
                         2xl:mt-5 2xl:px-15;
                     }
@@ -97,7 +97,7 @@
 
     /* Home page FAQ Section Styling */
     .home-faq{
-        @apply flex flex-col gap-10 py-15;
+        @apply flex flex-col gap-10 py-15 pt-25;
         h1{
             @apply p-0 text-center text-xl font-bold lg:pl-30 lg:text-left sm:text-3xl lg:text-4xl;
         }

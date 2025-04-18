@@ -53,8 +53,8 @@ const Card = () => {
               className='flex-shrink-0 relative flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5 group hover:cursor-pointer'
             >
               <img src={movie.posterPath} alt={movie.title} className='rounded-xl sm:w-50'/>
-              <div className="absolute bottom-15 rounded-xl sm:w-50 inset-0 bg-gradient-to-b from-transparent to-black opacity-850 group-hover:block hidden z-10"></div>
-              <button className='absolute bottom-20 text-sm font-semibold bg-gray-800 text-yellow-400 px-8 py-2 rounded-lg group-hover:block hidden z-10 hover:cursor-pointer'>Book Ticket</button>
+              <div className="absolute bottom-15 rounded-xl sm:w-50 inset-0 bg-gradient-to-b from-transparent to-black opacity-85 group-hover:block hidden z-10"></div>
+              <button className='absolute bottom-20 text-sm font-semibold bg-gray-900/50 text-yellow-400 px-8 py-2 rounded-lg group-hover:block hidden z-10 hover:cursor-pointer'>Book Ticket</button>
               <h5 className='text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base max-w-50 select-none'>{movie.title}</h5>
             </Link>
           ))}

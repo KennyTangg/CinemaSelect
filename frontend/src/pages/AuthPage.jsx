@@ -44,7 +44,7 @@ const Auth = () => {
     };
 
     return (
-        <div className="bg-gray-800 px-10 sm:px-19 pb-20 pt-15 rounded-xl shadow-xl w-full max-w-md z-50">
+        <div className="bg-gray-900/90 px-15 sm:px-19 pb-20 pt-15 rounded-xl border border-gray-700/70 shadow-xl shadow-gray-800 w-full max-w-md z-50">
             <h2 className="text-3xl font-bold text-center text-yellow-400">
                 {isLoginPage ? "Login to your account" : "Create an account"}
             </h2>
@@ -53,9 +53,7 @@ const Auth = () => {
             </p>
 
             {error && (
-                <div className="mb-4 py-2 px-4 text-sm bg-red-100 border-2 border-red-400 text-red-700 rounded">
-                    {error}
-                </div>
+                <div className="mb-4 py-2 px-4 text-sm bg-red-100 border-2 border-red-400 text-red-700 rounded"> {error} </div>
             )}
 
             <form onSubmit={handleSubmit}>
@@ -120,9 +118,9 @@ const Auth = () => {
 class AuthPage extends React.Component {
     render() {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-800">
+            <div className="min-h-screen flex items-center justify-center bg-gray-900">
                 <Link to="/">
-                    <button className='flex gap-2.5 sm:bg-yellow-400 text-yellow-400 sm:text-gray-800 font-semibold px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer'> 
+                    <button className='flex gap-2.5 sm:bg-gradient-to-br sm:from-yellow-300 sm:to-yellow-500 text-yellow-400 sm:text-gray-900 font-semibold px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer'> 
                         <ArrowBack /> 
                         <h2>Back</h2>
                     </button>

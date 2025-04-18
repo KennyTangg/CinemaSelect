@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-    AccountCircle,
-    Notifications,
-    ExitToApp,
-    Search
-} from '@mui/icons-material';
+import NavigationBar from '../components/NavigationBar';
 import Card from '../components/Card';
 import SideBar from '../components/SideBar';
 import LogOutModal from '../components/LogOutModal';
@@ -25,32 +20,11 @@ const MainPage = () => {
                 onToggle={handleSidebarToggle}
             />
             <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
-                <nav className="bg-gray-800 px-8 py-4 flex items-center justify-between">
-                    <div className="relative">
-                        <input
-                            type="text"
-                            placeholder="Search movies, theaters..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="bg-gray-700 text-white text-sm py-2 rounded-lg pl-10 w-96 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                        />
-                        <Search className="absolute left-3 top-1.5 text-gray-400" />
-                    </div>
-                    <div className="flex items-center space-x-6">
-                        <button className="text-gray-300 hover:text-yellow-400">
-                            <Notifications />
-                        </button>
-                        <button className="text-gray-300 hover:text-yellow-400">
-                            <AccountCircle />
-                        </button>
-                        <button 
-                            onClick={() => setIsModalOpen(true)} 
-                            className="text-gray-300 hover:text-yellow-400"
-                        >
-                            <ExitToApp />
-                        </button>
-                    </div>
-                </nav>
+                <NavigationBar 
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    setIsModalOpen={setIsModalOpen}
+                />
 
                 <div className="px-10 py-8">
                     <section className="mb-12">
@@ -69,4 +43,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage
+export default MainPage;

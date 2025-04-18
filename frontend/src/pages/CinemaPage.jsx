@@ -3,12 +3,7 @@ import axios from 'axios';
 import SideBar from '../components/SideBar';
 import CinemaLogo from '../components/CinemaLogo';
 import LogOutModal from '../components/LogOutModal';
-import {
-    Search,
-    Notifications,
-    AccountCircle,
-    ExitToApp,
-} from '@mui/icons-material';
+import NavigationBar from '../components/NavigationBar';
 
 const CinemaPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -40,38 +35,16 @@ const CinemaPage = () => {
                 onToggle={handleSidebarToggle}
             />
             <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
-                <nav className="bg-gray-800 px-8 py-4 flex items-center justify-between">
-                    <div className="relative">
-                        <input
-                            type="text"
-                            placeholder="Search movies, theaters..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="bg-gray-700 text-white text-sm py-2 rounded-lg pl-10 w-96 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                        />
-                        <Search className="absolute left-3 top-1.5 text-gray-400" />
-                    </div>
-                    <div className="flex items-center space-x-6">
-                        <button className="text-gray-300 hover:text-yellow-400">
-                            <Notifications />
-                        </button>
-                        <button className="text-gray-300 hover:text-yellow-400">
-                            <AccountCircle />
-                        </button>
-                        <button 
-                            onClick={() => setIsModalOpen(true)} 
-                            className="text-gray-300 hover:text-yellow-400"
-                        >
-                            <ExitToApp />
-                        </button>
-                    </div>
-                </nav>
-
+                <NavigationBar 
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    setIsModalOpen={setIsModalOpen}
+                />
                 <div className="px-10 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Available Cinemas</h2>
                     <div className="grid grid-cols-3 gap-6">
                         {cinemas.map((cinema) => (
-                            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900 rounded-lg p-6 shadow-sm shadow-gray-700">
+                            <div className="bg-gradient-to-br from-gray-800/80 to-gray-900 rounded-lg p-6 shadow-sm shadow-gray-600">
                                 <div className="flex justify-between items-center mb-1">
                                     <h3 className="text-xl font-semibold text-white">{cinema.placeName}</h3>
                                     <CinemaLogo placeName={cinema.placeName} />

@@ -8,6 +8,7 @@ import MoviePage from './pages/MoviePage';
 import CinemaPage from './pages/CinemaPage';
 import PaymentPage from './pages/PaymentPage';
 import TicketPage from './pages/TicketPage';
+import UpcomingPage from './pages/UpcomingPage';
 import HistoryPage from './pages/HistoryPage';
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/cinemas" element={<CinemaPage />} />
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/tickets" element={<TicketPage />} />
+            <Route path="/upcoming" element={<UpcomingPage />}  />
             <Route path="/history" element={<HistoryPage />}  />
             <Route path="*" element={<h1 className="flex items-center justify-center min-h-screen text-3xl">404: Page Not Found</h1>} />
           </Routes>

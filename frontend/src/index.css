@@ -20,7 +20,7 @@
     }
     
     button {
-        @apply transition-colors duration-300 hover:cursor-pointer;
+        @apply transition-colors duration-200 hover:cursor-pointer;
     }
     /* Custom scrollbar styles */
     .custom-scrollbar::-webkit-scrollbar {
@@ -42,9 +42,10 @@
 
     /* Navigation Bar Component Styling*/
     .navigation-bar{
-        @apply flex items-center justify-between gap-8 sm:px-16 h-20;
+        @apply absolute z-3 w-full flex-col flex items-center justify-end gap-8 h-25
+        sm:px-16 sm:flex-row sm:justify-between;
         p{
-            @apply font-semibold text-base ml-5 sm:mx-0 sm:text-2xl;
+            @apply text-center font-semibold text-xl sm:mx-0 sm:text-2xl;
             span{
                 @apply text-yellow-400;
             }
@@ -52,10 +53,10 @@
         div{
             @apply flex items-center gap-6 h-6 font-medium;
             button{
-                @apply text-sm px-4 cursor-pointer sm:text-base;
+                @apply hidden sm:block text-sm px-4 cursor-pointer sm:text-base hover:text-gray-200;
             }
             .sign-up{
-                @apply border-2 border-white rounded-2xl px-5 py-0.5 mr-2 sm:mx-auto transition duration-300 hover:bg-white hover:text-gray-950 hover:border-gray-950;
+                @apply border-2 border-gray-200 rounded-2xl px-4 py-1 mr-2 sm:mx-auto transition duration-300 hover:bg-gray-100 hover:text-gray-950 hover:border-gray-950;
             }
         }
     }
@@ -64,27 +65,31 @@
     .hero{
         @apply flex items-center justify-center;
         img{
-            @apply brightness-55 max-w-full md:rounded-4xl sm:w-3xl lg:w-4xl xl:w-7xl 2xl:w-full 2xl:max-h-dvh 2xl:rounded-none;
+            @apply opacity-40 max-w-full h-screen object-cover sm:h-auto md:rounded-4xl sm:w-3xl lg:w-4xl xl:w-7xl 2xl:w-full 2xl:max-h-dvh 2xl:rounded-none;
         }
         div {
-            @apply z-10 absolute lg:top-55 xl:top-70 2xl:top-80;
+            @apply z-10 absolute lg:top-55 xl:top-70;
                 span{
                     @apply flex flex-col items-center px-10 sm:px-20 lg:px-30;
                     h1,h2{
                         @apply lg:px-30 text-center;
                     }
                     h1{
-                        @apply font-extrabold  xl:text-5xl xl:py-6
+                        @apply font-bold text-2xl
+                        xl:text-6xl xl:py-6
                         lg:py-2 sm:px-10
                         sm:text-3xl sm:py-1;
                     }
                     h2{
-                        @apply font-light text-xs pt-5 pb-3.5 xl:text-2xl xl:py-3 lg:py-5
+                        @apply font-light pt-5 pb-3.5 
+                        xl:text-2xl xl:py-3 lg:py-5
                         sm:text-xl sm:py-7;
                     }
                     button{
-                        @apply bg-yellow-400 text-gray-950 text-sm px-5 py-1 rounded-2xl border-2  border-black cursor-pointer hover:bg-yellow-500
-                        sm:px-10 sm:py-2 sm:text-base xl:px-10 xl:py-3 xl:text-xl sm:font-medium sm:border-4 2xl:mt-5 2xl:px-15;
+                        @apply bg-yellow-400 text-gray-950 font-semibold px-10 py-2 rounded-2xl border-2  border-black cursor-pointer hover:bg-yellow-500
+                        sm:px-10 sm:py-2 sm:text-base sm:border-4 
+                        xl:px-10 xl:py-3 xl:text-xl 
+                        2xl:mt-5 2xl:px-15;
                     }
             }
         }

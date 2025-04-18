@@ -24,14 +24,14 @@ const TicketPage = () => {
                 const token = localStorage.getItem('token');
                 const response = await axios.get('/api/tickets', {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        authorization: `Bearer ${token}`
                     }
                 });
                 setTickets(response.data);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching tickets:', error);
-                setError(error.response?.data?.message || 'Failed to fetch tickets');
+                setError('Failed to fetch tickets');
                 setLoading(false);
             }
         };
@@ -152,20 +152,13 @@ const TicketPage = () => {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                         {filteredTickets.map((ticket) => (
-                            <div 
-                                key={ticket.ticketId}
-                                className="bg-gray-800 rounded-lg border-2 border-gray-700 hover:border-gray-600 transition-colors duration-300"
-                            >
-                                <div className="relative h-28">
-                                    <img 
-                                        src={ticket.moviePoster} 
-                                        alt={ticket.movieTitle}
-                                        className="w-full h-full rounded-lg object-cover"
-                                    />
-                                    <div className="absolute inset-0  bg-gradient-to-t from-gray-800 to-transparent"></div>
+                            <div className="bg-gray-900 rounded-xl shadow-sm shadow-gray-600  transition-colors duration-300">
+                                <div className="relative h-28 overflow-hidden group">
+                                    <img src={ticket.moviePoster} alt={ticket.movieTitle} className="w-full h-full rounded-xl object-cover transform transition duration-300 group-hover:scale-125" />
+                                    <div className="absolute inset-0  bg-gradient-to-t from-gray-900 to-transparent"></div>
                                 </div>
 
-                                <div className="pt-2 pb-4 px-5">
+                                <div className="pt-2 pb-4 px-5 ">
                                     <div className="flex justify-between mb-4">
                                         <div>
                                             <h3 className="text-md font-semibold text-white">{ticket.movieTitle}</h3>

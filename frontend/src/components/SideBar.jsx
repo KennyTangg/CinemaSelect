@@ -8,7 +8,7 @@ import {
     History,
     Settings,
     Help,
-    Close,
+    ArrowBack,
     Menu
 } from '@mui/icons-material';
 
@@ -28,7 +28,7 @@ const SideBar = ({ isOpen, onToggle }) => {
 
 
     return (
-        <div className={`${isOpen ? 'w-60' : 'w-20'} bg-gray-800 text-white transition-all duration-300 fixed h-full`}>
+        <div className={`${isOpen ? 'w-60' : 'w-20'} bg-gray-900 shadow-gray-700 shadow-sm transition-all duration-300 fixed h-full`}>
             <div className="px-6 py-4 flex items-center justify-between">
                 {isOpen ? (
                     <h1 className="text-lg font-medium text-yellow-400">
@@ -41,7 +41,7 @@ const SideBar = ({ isOpen, onToggle }) => {
                     onClick={onToggle}
                     className={`text-gray-300 hover:text-yellow-400 ${isOpen ? 'grow-0' : 'grow-1'}`}
                 >
-                    {isOpen ? <Close /> : <Menu />}
+                    {isOpen ? <ArrowBack /> : <Menu />}
                 </button>
             </div>
 
@@ -51,7 +51,7 @@ const SideBar = ({ isOpen, onToggle }) => {
                     <Link 
                         key={index} 
                         to={item.path}
-                        className="flex items-center text-sm space-x-4 text-gray-300 hover:text-yellow-400 hover:bg-gray-700 rounded-lg p-3 mb-1 transition-colors duration-300"
+                        className="flex items-center text-sm space-x-4 text-gray-300 hover:text-yellow-400 rounded-lg p-3 mb-1 transition-colors duration-300"
                     >
                         {item.icon}
                         {isOpen && <span>{item.label}</span>}
@@ -60,12 +60,12 @@ const SideBar = ({ isOpen, onToggle }) => {
             </div>
 
             {/* Bottom Navigation Items */}
-            <div className="absolute w-full bottom-0 p-4 border-gray-700">
+            <div className="absolute w-full bottom-0 p-4">
                 {bottomItems.map((item, index) => (
                     <Link 
                         key={index} 
                         to={item.path}
-                        className="flex items-center text-sm space-x-4 text-gray-300 hover:text-yellow-400 hover:bg-gray-700 rounded-lg p-3 mb-1 transition-colors duration-300"
+                        className="flex items-center text-sm space-x-4 text-gray-300 hover:text-yellow-400 rounded-lg p-3 mb-1 transition-colors duration-300"
                     >
                         {item.icon}
                         {isOpen && <span>{item.label}</span>}

@@ -101,12 +101,12 @@ const HistoryPage = () => {
                     : (
                         <div className="grid gap-6">
                             {filteredHistory.map((ticket) => (
-                                <div className="bg-gradient-to-tl from-gray-900 to-gray-800/70 rounded-lg p-6 border-2 border-gray-700/70">
+                                <div className=" rounded-lg p-4 border-2 border-gray-800 shadow-sm shadow-gray-700">
                                     <div className="flex gap-7">
                                         <img src={ticket.moviePoster} alt={ticket.movieTitle} className="w-1/8 object-cover rounded brightness-85" />
                                         <div className='flex-1'>
-                                            <h3 className="text-2xl font-bold text-gray-00 my-2"> {ticket.movieTitle} </h3>
-                                            <div className="grid grid-cols-2 gap-10 text-gray-200">
+                                            <h3 className="text-xl font-bold text-gray-00 my-2"> {ticket.movieTitle} </h3>
+                                            <div className="grid grid-cols-2 gap-10 text-gray-200 text-sm">
                                                 <div className='space-y-1'>
                                                     <p>Cinema : <span className='text-gray-400'> {ticket.cinemaName}</span></p>
                                                     <p>Date :  <span className='text-gray-400'>{new Date(ticket.showDate).toLocaleDateString()}</span></p>
@@ -121,10 +121,10 @@ const HistoryPage = () => {
                                                     }`}>{ticket.status}</span></p>
                                                 </div>
                                             </div>
-                                            <p className="mt-4 text-right text-yellow-400 font-medium">
+                                            <p className="mt-4 mr-2 text-right text-yellow-400 font-medium">
                                                 IDR {ticket.price.toLocaleString()}
                                             </p>
-                                            <div className="mt-4 flex justify-end space-x-4 font-semibold">
+                                            <div className="mt-4 mr-2 flex justify-end space-x-4 font-semibold text-sm">
                                                 {ticket.status === 'active' 
                                                 ? ( <>
                                                         <button

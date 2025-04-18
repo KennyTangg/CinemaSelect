@@ -9,7 +9,7 @@ const SuccessModal = ({ isOpen, onClose, ticketId }) => {
 
     return (
         <div className="fixed inset-0 bg-transparent backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-gray-800/90 p-8 rounded-lg max-w-md w-full mx-4 relative border border-gray-700">
+            <div className="bg-gray-900/90 p-8 rounded-lg max-w-md w-full mx-4 relative border border-gray-700">
                 <button 
                     onClick={onClose}
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-300"

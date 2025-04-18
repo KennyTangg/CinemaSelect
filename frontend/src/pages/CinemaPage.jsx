@@ -70,11 +70,8 @@ const CinemaPage = () => {
                 <div className="px-10 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Available Cinemas</h2>
                     <div className="grid grid-cols-3 gap-6">
-                        {cinemas.map((cinema, index) => (
-                            <div 
-                                key={index} 
-                                className="bg-gray-800 rounded-lg p-6 shadow-lg"
-                            >
+                        {cinemas.map((cinema) => (
+                            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900 rounded-lg p-6 shadow-sm shadow-gray-700">
                                 <div className="flex justify-between items-center mb-1">
                                     <h3 className="text-xl font-semibold text-white">{cinema.placeName}</h3>
                                     <CinemaLogo placeName={cinema.placeName} />
@@ -88,25 +85,25 @@ const CinemaPage = () => {
                                     {cinema.priceImax && (
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-400">IMAX:</span>
-                                            <span className="text-yellow-400">{cinema.priceImax}</span>
+                                            <span className="text-gray-200">{cinema.priceImax}</span>
                                         </div>
                                     )}
                                     {cinema.priceVelvet && (
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-400">Velvet:</span>
-                                            <span className="text-yellow-400">{cinema.priceVelvet}</span>
+                                            <span className="text-gray-200">{cinema.priceVelvet}</span>
                                         </div>
                                     )}
                                     {cinema.priceGoldClass && (
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-400">Gold Class:</span>
-                                            <span className="text-yellow-400">{cinema.priceGoldClass}</span>
+                                            <span className="text-gray-200">{cinema.priceGoldClass}</span>
                                         </div>
                                     )}
                                     {cinema.priceSatin && (
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-400">Satin:</span>
-                                            <span className="text-yellow-400">{cinema.priceSatin}</span>
+                                            <span className="text-gray-200">{cinema.priceSatin}</span>
                                         </div>
                                     )}
                                 </div>

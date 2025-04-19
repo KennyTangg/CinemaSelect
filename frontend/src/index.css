@@ -53,10 +53,10 @@
         div{
             @apply flex items-center gap-6 h-6 font-medium;
             button{
-                @apply hidden sm:block text-sm px-4 cursor-pointer sm:text-base hover:text-gray-200;
+                @apply hidden sm:block text-sm px-4 cursor-pointer sm:text-base hover:text-yellow-400;
             }
             .sign-up{
-                @apply border-2  border-gray-200 rounded-xl px-4 py-1 mr-2 sm:mx-auto transition duration-300 hover:bg-gray-100 hover:text-gray-950 hover:border-gray-950;
+                @apply border-2  border-gray-200 rounded-xl px-4 py-1 mr-2 sm:mx-auto transition duration-200 hover:bg-yellow-400 hover:text-gray-950 hover:border-gray-950;
             }
         }
     }

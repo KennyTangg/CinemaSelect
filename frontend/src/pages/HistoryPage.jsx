@@ -8,15 +8,10 @@ import LogOutModal from '../components/LogOutModal';
 const HistoryPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [refresh, setRefresh] = useState(0);
-
-    const handleSidebarToggle = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    }
 
     const handleStatusUpdate = async (ticketId, newStatus) => {
         try {
@@ -58,17 +53,13 @@ const HistoryPage = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-900">
-            <SideBar 
-                isOpen={isSidebarOpen}
-                onToggle={handleSidebarToggle}
-            />
-            <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
+            <div className={`flex-1 transition-all duration-300`}>
                 <NavigationBar 
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                     setIsModalOpen={setIsModalOpen}
                 />
-                <div className="px-10 py-8">
+                <div className="px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Booking History</h2>
                     {loading 
                     ? ( <div className="text-center text-gray-400">Loading...</div>)
@@ -81,7 +72,7 @@ const HistoryPage = () => {
                             {filteredHistory.map((ticket) => (
                                 <div className=" rounded-lg p-4 border-2 border-gray-800 shadow-sm shadow-gray-600">
                                     <div className="flex gap-7">
-                                        <img src={ticket.moviePoster} alt={ticket.movieTitle} className="w-1/8 object-cover rounded brightness-85" />
+                                        <img src={ticket.moviePoster} alt={ticket.movieTitle} className="w-1/9 object-cover rounded brightness-85" />
                                         <div className='flex-1'>
                                             <h3 className="text-xl font-bold text-gray-00 my-2"> {ticket.movieTitle} </h3>
                                             <div className="grid grid-cols-2 gap-10 text-gray-200 text-sm">

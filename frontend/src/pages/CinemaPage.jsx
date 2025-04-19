@@ -6,14 +6,9 @@ import LogOutModal from '../components/LogOutModal';
 import NavigationBar from '../components/NavigationBar';
 
 const CinemaPage = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [cinemas, setCinemas] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const handleSidebarToggle = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
 
     useEffect(() => {
         const fetchCinemas = async () => {
@@ -30,19 +25,15 @@ const CinemaPage = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-900">
-            <SideBar 
-                isOpen={isSidebarOpen}
-                onToggle={handleSidebarToggle}
-            />
-            <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
+            <div className={`flex-1 transition-all duration-300`}>
                 <NavigationBar 
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                     setIsModalOpen={setIsModalOpen}
                 />
-                <div className="px-10 py-8">
+                <div className="px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Available Cinemas</h2>
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         {cinemas.map((cinema) => (
                             <div className="bg-gradient-to-br from-gray-800/80 to-gray-900 rounded-lg p-6 shadow-sm shadow-gray-600">
                                 <div className="flex justify-between items-center mb-1">
@@ -83,7 +74,7 @@ const CinemaPage = () => {
                             </div>
                         ))}
                     </div>
-                    <h1 className='mt-7 py-2 rounded-lg text-center font-bold text-gray-500 border-2'>More Cinema Coming Soon</h1>
+                    <h1 className='mt-7 py-2 rounded-lg text-center font-bold text-gray-700 border-1'>More Cinema Coming Soon</h1>
                 </div>
             </div>
             <LogOutModal 

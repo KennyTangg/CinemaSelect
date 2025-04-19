@@ -44,7 +44,7 @@ const Auth = () => {
     };
 
     return (
-        <div className="bg-gray-900/90 px-15 sm:px-19 pb-20 pt-15 rounded-xl border border-gray-700/70 shadow-xl shadow-gray-800 w-full max-w-md z-50">
+        <div className="bg-gray-900/80 px-15 sm:px-19 pb-20 pt-15 rounded-xl border border-gray-700/70 shadow-md shadow-gray-800 w-full max-w-md z-50">
             <h2 className="text-3xl font-bold text-center text-yellow-400">
                 {isLoginPage ? "Login to your account" : "Create an account"}
             </h2>
@@ -125,9 +125,8 @@ class AuthPage extends React.Component {
                         <h2>Back</h2>
                     </button>
                 </Link>
-                <img src={authImage} alt="Movies Background" className='absolute hidden sm:block sm:h-screen xl:w-screen'/>
-                <div className="absolute hidden sm:block inset-0 z-10 bg-[radial-gradient(circle,rgba(0,0,0,0.2)_50%,rgba(0,0,0,0.5)_60%,rgba(0,0,0,0.8)_80%,rgba(0,0,0,1)_100%)]">
-                </div>
+                <img src={authImage} alt="Movies Background" className='absolute hidden sm:block opacity-50 sm:h-screen xl:w-screen'/>
+                <div className="absolute hidden sm:block inset-0 z-10 bg-[radial-gradient(circle,rgba(17,24,39,0.2)_60%,rgba(17,24,39,0.5)_70%,rgba(17,24,39,0.8)_90%,rgba(17,24,39,1)_100%)]"></div>
                 <Auth />
             </div>
         );

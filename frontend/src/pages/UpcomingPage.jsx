@@ -21,7 +21,6 @@ import moviePoster20 from "../assets/movie-poster-20.webp";
 const UpcomingPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     const movies = [
         {title:"The Dark Knight", poster: moviePoster8},
@@ -39,18 +38,13 @@ const UpcomingPage = () => {
         {title:"Inside Out (2015)", poster: moviePoster20},
     ];
 
-    const handleSidebarToggle = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    }
-
     const filteredMovies = movies.filter(movie => 
         movie.title?.toLowerCase().includes(searchQuery.toLowerCase())
     );
     
     return (
         <div className="flex min-h-screen bg-gray-900">
-            <SideBar isOpen={isSidebarOpen} onToggle={handleSidebarToggle} />
-            <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
+            <div className={`flex-1 transition-all duration-300`}>
                 <NavigationBar 
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
@@ -58,7 +52,7 @@ const UpcomingPage = () => {
                     searchPlaceholder='Search upcoming shows...'
                 />
 
-                <section className="px-10 py-8">
+                <section className="px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Upcoming Shows</h2>
                     <div className='grid grid-cols-5 gap-10'>
                         {filteredMovies.map((movie) => (

@@ -6,7 +6,6 @@ import NavigationBar from '../components/NavigationBar';
 import { QrCode2 } from '@mui/icons-material';
 
 const TicketPage = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [tickets, setTickets] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -34,10 +33,6 @@ const TicketPage = () => {
         fetchTickets();
     }, []);
 
-    const handleSidebarToggle = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
-
     const filteredTickets = tickets.filter(ticket => 
         ticket.movieTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
         ticket.cinemaName.toLowerCase().includes(searchQuery.toLowerCase())
@@ -46,8 +41,7 @@ const TicketPage = () => {
     if (loading) {
         return (
             <div className="flex min-h-screen bg-gray-900">
-                <SideBar isOpen={isSidebarOpen} onToggle={handleSidebarToggle} />
-                <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
+                <div className={`flex-1 transition-all duration-300`}>
                     <NavigationBar 
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
@@ -62,8 +56,7 @@ const TicketPage = () => {
     if (error) {
         return (
             <div className="flex min-h-screen bg-gray-900">
-                <SideBar isOpen={isSidebarOpen} onToggle={handleSidebarToggle} />
-                <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
+                <div className={`flex-1 transition-all duration-300`}>
                     <NavigationBar 
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
@@ -77,17 +70,16 @@ const TicketPage = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-900">
-            <SideBar isOpen={isSidebarOpen} onToggle={handleSidebarToggle} />
-            <div className={`flex-1 ${isSidebarOpen ? 'ml-60' : 'ml-20'} transition-all duration-300`}>
+            <div className={`flex-1 transition-all duration-300`}>
                 <NavigationBar 
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                     setIsModalOpen={setIsModalOpen}
                 />
-                <div className="px-12 py-8">
+                <div className="px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">My Tickets</h2>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
                         {filteredTickets.map((ticket) => (
                             <div className="bg-gray-900 rounded-xl shadow-sm shadow-gray-600  transition-colors duration-300">
                                 <div className="relative h-28 overflow-hidden group">

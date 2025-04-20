@@ -10,6 +10,7 @@ import PaymentPage from './pages/PaymentPage';
 import TicketPage from './pages/TicketPage';
 import UpcomingPage from './pages/UpcomingPage';
 import HistoryPage from './pages/HistoryPage';
+import SettingsPage from './pages/SettingsPage';
 
 const App = () => {
   return (
@@ -30,6 +31,8 @@ const App = () => {
             <Route path="/tickets" element={<TicketPage />} />
             <Route path="/upcoming" element={<UpcomingPage />}  />
             <Route path="/history" element={<HistoryPage />}  />
+            <Route path="/settings" element={<SettingsPage />} /> 
+            <Route path="/settings/:option" element={<SettingsPage />} /> 
             <Route path="*" element={<h1 className="flex items-center justify-center min-h-screen text-3xl">404: Page Not Found</h1>} />
           </Routes>
         </main>

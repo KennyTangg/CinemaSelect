@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Add, Close } from '@mui/icons-material'; 
+import { useLocation } from 'react-router-dom';
 
 const questions = [{
   ask:"What is Cinema Select?",
@@ -20,6 +21,8 @@ const questions = [{
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const location = useLocation();
+  const isHomePage = location.pathname == '/';
 
   const handleClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -27,18 +30,38 @@ const FAQ = () => {
 
   return (
     <>
-      <h1>Frequently Asked Questions</h1>
-      <div className="question">
-        {questions.map((question, index) => (
-          <span key={index}>
-            <div onClick={() => handleClick(index)} className="hover:bg-gray-700 hover:cursor-pointer" >
-              <h6>{question.ask}</h6>
-              <i>{activeIndex !== index ? <Add /> : <Close />}</i>
+    {isHomePage 
+    ? (<>
+        <h1>Frequently Asked Questions</h1>
+        <div className="question">
+          {questions.map((question) => (
+            <span>
+              <div onClick={() => handleClick(index)} className="hover:bg-gray-700 hover:cursor-pointer" >
+                <h6>{question.ask}</h6>
+                <i>{activeIndex !== index ? <Add /> : <Close />}</i>
+              </div>
+              <p style={{ display: activeIndex === index ? 'block' : 'none' }} >{question.answer}</p>
+            </span>
+          ))}
+        </div> 
+      </>)
+    : ( <div className='space-y-8'>
+          <div className='space-y-2'>
+              <h1 className='text-2xl font-semibold'>Frequently Asked Questions</h1>
+              <hr className='text-gray-700 mb-4' />
+              <p className='text-gray-400'>
+                  Cinema Select is your premier destination for hassle-free movie ticket booking. 
+                  Founded in 2023, we've quickly become one of Indonesia's leading movie ticketing platforms, 
+                  serving millions of movie enthusiasts across the country.
+              </p>
+          </div>
+          {questions.map((question) => (
+            <div className='space-y-2'>
+                <h2 className='text-xl'>• {question.ask}</h2>
+                <p className='text-gray-400'>{question.answer}</p>
             </div>
-            <p style={{ display: activeIndex === index ? 'block' : 'none' }} >{question.answer}</p>
-          </span>
-        ))}
-      </div>
+          ))}
+      </div>)}
     </>
   )
 }

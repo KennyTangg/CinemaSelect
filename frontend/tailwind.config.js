@@ -9,6 +9,9 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      gridTemplateColumns: {
+        '22': 'repeat(22, minmax(0, 1fr))',
+      },
       borderWidth: {
         '1': '1px',
       },

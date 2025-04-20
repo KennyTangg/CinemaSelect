@@ -33,7 +33,12 @@ const HistoryPage = () => {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const response = await axios.get("/api/tickets/nonActive");
+                const token = localStorage.getItem('token')
+                const response = await axios.get("/api/tickets/nonActive",{
+                    headers: {
+                        authorization: `Bearer ${token}`
+                    }
+                });
                 setHistory(response.data);
                 setLoading(false);
             } catch (error) {

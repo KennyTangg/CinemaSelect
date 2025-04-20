@@ -5,7 +5,6 @@ import axios from 'axios';
 import SuccessModal from '../components/SuccessModal';
 
 const PaymentPage = () => {
-    const navigate = useNavigate();
     const location = useLocation();
     const bookingData = location.state;
     const [selectedSeats, setSelectedSeats] = useState([]);

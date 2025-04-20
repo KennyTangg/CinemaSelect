@@ -1,11 +1,15 @@
 const express = require('express');
 const ticketRouter = express.Router();
 const Ticket = require('../models/ticket');
-// const authentication = require('../middleware/validateToken'); // Comment out this line
+const protect = require('../middleware/validateToken');
+
+// Apply authentication middleware to all ticket routes
+ticketRouter.use(protect);
 
 ticketRouter.get("/", async (req,res) => {
     try{
         const tickets = await Ticket.find({ 
+            userId: req.user.id,
             status: 'active' 
         });
         if(!tickets.length){
@@ -19,7 +23,9 @@ ticketRouter.get("/", async (req,res) => {
 
 ticketRouter.get("/nonActive", async (req,res) => {
     try {
-        const tickets = await Ticket.find({}).sort({ createdAt: -1 }); 
+        const tickets = await Ticket.find({
+            userId: req.user.id
+        }).sort({ createdAt: -1 }); 
         if(!tickets){
             return res.status(404).json({ message: "No ticket found"})
         }
@@ -33,7 +39,8 @@ ticketRouter.get("/nonActive", async (req,res) => {
 ticketRouter.get("/:ticketId", async (req,res) => {
     try{
         const ticket = await Ticket.findOne({
-            ticketId: req.params.ticketId
+            ticketId: req.params.ticketId,
+            userId: req.user.id
         });
         
         if(!ticket){
@@ -50,6 +57,7 @@ ticketRouter.delete("/:ticketId", async (req,res) => {
         const ticket = await Ticket.findOneAndUpdate(
             {
                 ticketId: req.params.ticketId,
+                userId: req.user.id,
                 status: "active"
             },
             { status: 'cancelled' },
@@ -74,7 +82,8 @@ ticketRouter.patch("/:ticketId/status", async (req,res) => {
 
         const ticket = await Ticket.findOneAndUpdate(
             { 
-                ticketId: req.params.ticketId
+                ticketId: req.params.ticketId,
+                userId: req.user.id
             }, 
             { status },
             { new: true }
@@ -104,6 +113,7 @@ ticketRouter.post("/add", async (req, res) => {
             screenType,
             price,
             paymentMethod,
+            userId: req.user.id,
             status: 'active'
         });
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Search, Notifications, AccountCircle, ExitToApp, Menu } from '@mui/icons-material';
+import { Search, Notifications, AccountCircle } from '@mui/icons-material';
+import LogoutIcon from '@mui/icons-material/Logout';
 import SideBar from '../components/SideBar';
 
-const NavigationBar = ({ searchQuery, setSearchQuery, setIsModalOpen, searchPlaceholder = "Search movies, theaters..." }) => {
+const NavigationBar = ({ searchQuery, setSearchQuery, setIsModalOpen, searchPlaceholder = "Search movies, cinemas..." }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const handleSidebarToggle = () => {
@@ -11,32 +12,27 @@ const NavigationBar = ({ searchQuery, setSearchQuery, setIsModalOpen, searchPlac
 
     return (
         <nav className="bg-gray-900 border-b border-gray-600 px-8 py-5 flex items-center justify-between sticky top-0 z-27">
-            <div className='flex items-center gap-8'>
-                <SideBar isOpen={isSidebarOpen} onToggle={handleSidebarToggle} />
+            <SideBar isOpen={isSidebarOpen} onToggle={handleSidebarToggle} />
+            <div className='flex gap-8 items-center'>
                 <div className="relative">
-                    <input
-                        type="text"
+                    <input 
                         placeholder={searchPlaceholder}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="bg-gray-800 text-white text-sm py-2 rounded-lg px-10 w-96 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="border-1 border-gray-600 text-gray-300 text-sm py-2 px-10 w-96 rounded focus:outline-none focus:ring focus:ring-gray-500"
                     />
                     <Search className="absolute left-3 top-1.5 text-gray-400" />
                 </div>
-            </div>
-            <div className="flex items-center space-x-6">
-                <button className="text-gray-300 hover:text-yellow-400">
-                    <Notifications />
-                </button>
-                <button className="text-gray-300 hover:text-yellow-400">
-                    <AccountCircle />
-                </button>
-                <button 
-                    onClick={() => setIsModalOpen(true)} 
-                    className="text-gray-300 hover:text-yellow-400"
-                >
-                    <ExitToApp />
-                </button>
+                <div className="flex items-center space-x-3">
+                    <button className="text-gray-400 hover:bg-gray-800 border-1 rounded p-1.5 border-gray-600"><Notifications /></button>
+                    <button className="text-gray-400 hover:bg-gray-800 border-1 rounded p-1.5 border-gray-600"><AccountCircle /></button>
+                    <button 
+                        onClick={() => setIsModalOpen(true)} 
+                        className="text-gray-400 hover:bg-gray-800 border-1 rounded p-1.5 border-gray-600"
+                    >
+                        <LogoutIcon />
+                    </button>
+                </div>
             </div>
         </nav>
     );

@@ -39,7 +39,7 @@ const Card = () => {
     <>
       <div className={`${isHomePage 
         ? 'grid mx-auto grid-cols-2 xl:gap-10 lg:grid-cols-4 lg:gap-3 sm:grid-cols-2' 
-        : 'flex overflow-x-auto space-x-10 py-4 px-2 lg:px-0 custom-scrollbar pb-10'}`}>
+        : 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-10'}`}>
         {isHomePage 
           ? displayedMovies.map((movie) => (
             <span className='flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5'>
@@ -50,12 +50,13 @@ const Card = () => {
           : movies.map((movie) => (
             <Link 
               to={`/main/${movie.path}`} 
-              className='flex-shrink-0 relative flex flex-col items-center py-7 gap-5 lg:py-0 sm:py-5 group hover:cursor-pointer'
+              className='relative flex flex-col items-center rounded-xl py-7 gap-5 lg:py-0 sm:py-5 group hover:cursor-pointer'
             >
-              <img src={movie.posterPath} alt={movie.title} className='rounded-xl sm:w-50'/>
-              <div className="absolute bottom-15 rounded-xl sm:w-50 inset-0 bg-gradient-to-b from-transparent to-black opacity-85 group-hover:block hidden z-10"></div>
-              <button className='absolute bottom-20 text-sm font-semibold bg-gray-900/50 text-yellow-400 px-8 py-2 rounded-lg group-hover:block hidden z-10 hover:cursor-pointer'>Book Ticket</button>
-              <h5 className='text-center font-medium text-xs xl:text-sm lg:text-xs sm:text-base max-w-50 select-none'>{movie.title}</h5>
+              <img src={movie.posterPath} alt={movie.title} className='rounded-xl sm:w-40.5'/>
+              <h5 className='text-center font-medium text-sm sm:text-sm max-w-35 select-none'>{movie.title}</h5>
+
+              <div className="absolute left-0 bottom-15 rounded-lg sm:w-40.1 inset-0 bg-gradient-to-b from-transparent to-black opacity-85 group-hover:block hidden z-10"></div>
+              <button className='absolute bottom-20 text-xs font-medium text-yellow-400 bg-gray-900/70 px-5 py-2 rounded-lg group-hover:block hidden z-10'>Book Ticket</button>
             </Link>
           ))}
       </div>

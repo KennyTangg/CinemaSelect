@@ -130,7 +130,7 @@ const SettingsPage = () => {
                         </div>
                         <div className='space-y-6'>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>1. Acceptance of Terms</h2>
+                                <h2 className='text-xl'>1. Acceptance of Terms</h2>
                                 <p className='text-gray-400'>
                                     By accessing and using Cinema Select's services, you agree to be bound 
                                     by these terms and conditions. Our service is provided "as is" and we 
@@ -138,7 +138,7 @@ const SettingsPage = () => {
                                 </p>
                             </div>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>2. User Accounts</h2>
+                                <h2 className='text-xl'>2. User Accounts</h2>
                                 <p className='text-gray-400'>
                                     Users must provide accurate and complete information when creating an account. 
                                     You are responsible for maintaining the confidentiality of your account 
@@ -146,7 +146,7 @@ const SettingsPage = () => {
                                 </p>
                             </div>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>3. Booking and Payments</h2>
+                                <h2 className='text-xl'>3. Booking and Payments</h2>
                                 <p className='text-gray-400'>
                                     All ticket bookings are final and non-refundable unless otherwise specified. 
                                     Prices are subject to change without notice. Payment processing is handled 
@@ -154,7 +154,7 @@ const SettingsPage = () => {
                                 </p>
                             </div>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>4. Cancellation Policy</h2>
+                                <h2 className='text-xl'>4. Cancellation Policy</h2>
                                 <p className='text-gray-400'>
                                     Cancellations are subject to individual theater policies. Refunds, if 
                                     applicable, will be processed within 5-7 business days.
@@ -174,7 +174,7 @@ const SettingsPage = () => {
                         </div>
                         <div className='space-y-6'>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>1. Information We Collect</h2>
+                                <h2 className='text-xl'>1. Information We Collect</h2>
                                 <p className='text-gray-400'>
                                     We collect information that you provide directly to us, including:
                                     <ul className='list-disc pl-6 mt-2 space-y-2'>
@@ -186,7 +186,7 @@ const SettingsPage = () => {
                                 </p>
                             </div>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>2. How We Use Your Information</h2>
+                                <h2 className='text-xl'>2. How We Use Your Information</h2>
                                 <p className='text-gray-400'>
                                     We use the collected information to:
                                     <ul className='list-disc pl-6 mt-2 space-y-2'>
@@ -199,14 +199,14 @@ const SettingsPage = () => {
                                 </p>
                             </div>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>3. Data Security</h2>
+                                <h2 className='text-xl'>3. Data Security</h2>
                                 <p className='text-gray-400'>
                                     We implement appropriate security measures to protect your personal information. 
                                     This includes encryption, secure servers, and regular security audits.
                                 </p>
                             </div>
                             <div className='space-y-2'>
-                                <h2 className='text-xl font-semibold'>4. Your Rights</h2>
+                                <h2 className='text-xl'>4. Your Rights</h2>
                                 <p className='text-gray-400'>
                                     You have the right to:
                                     <ul className='list-disc pl-6 mt-2 space-y-2'>
@@ -231,8 +231,28 @@ const SettingsPage = () => {
                 
             default:
                 return (
-                    <div className='flex items-center justify-center h-full text-gray-400'>
-                        Select an option from the menu
+                    <div className='space-y-6'>
+                        <div className='space-y-2'>
+                            <h1 className='text-2xl font-semibold'>My Account</h1>
+                            <hr className='text-gray-700' />
+                        </div>
+                        <div className='space-y-2'>
+                            <h1 className='text-md'>Email</h1>
+                            <input 
+                                type="email"
+                                value="john.doe@email.com"
+                                className="w-1/2 px-4 py-2 rounded-lg border border-gray-700"
+                            />
+                        </div>
+                        <div className='pb-4 space-y-2'>
+                            <h1 className='text-md'>Password</h1>
+                            <input 
+                                type="password"
+                                value="••••••••"
+                                className="w-1/4 px-4 py-2 rounded-lg border border-gray-700"
+                            />
+                        </div>
+                        <button className='bg-green-700 text-sm rounded px-5 py-2 font-semibold hover:bg-green-700/90'>Update Account</button>
                     </div>
                 );
         }
@@ -248,8 +268,9 @@ const SettingsPage = () => {
                         {settingOptions.map((option) => (<>
                             {option.name === 'Sign Out' &&  <hr className='text-gray-700 mx-3' /> }
                             <button onClick={() => handleOptionClick(option.url)}
-                                className={`flex justify-between font-medium px-4 py-2 text-sm rounded-lg text-gray-500 hover:bg-gray-800
-                                    ${location.pathname === `/settings/${option.url}` ? ' text-white hover:bg-gray-900' : ''}
+                                className={`flex justify-between font-medium px-4 py-2 text-sm rounded-lg text-gray-400 hover:bg-gray-800
+                                    ${(location.pathname === `/settings/${option.url}` || (location.pathname === '/settings' && option.url === 'account')) 
+                                       ? 'text-white hover:bg-gray-900' : ''}
                                     ${option.name === 'Sign Out' && 'text-red-500 hover:text-red-700 hover:bg-gray-900'}`}
                             >
                                 {option.name} 

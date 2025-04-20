@@ -34,9 +34,9 @@ const FAQ = () => {
     ? (<>
         <h1>Frequently Asked Questions</h1>
         <div className="question">
-          {questions.map((question) => (
+          {questions.map((question, index) => (
             <span>
-              <div onClick={() => handleClick(index)} className="hover:bg-gray-700 hover:cursor-pointer" >
+              <div onClick={() => handleClick(index)} className="hover:bg-gray-700/70 hover:cursor-pointer" >
                 <h6>{question.ask}</h6>
                 <i>{activeIndex !== index ? <Add /> : <Close />}</i>
               </div>

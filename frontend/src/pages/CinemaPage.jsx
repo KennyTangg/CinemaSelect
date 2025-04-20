@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SideBar from '../components/SideBar';
 import CinemaLogo from '../components/CinemaLogo';
 import LogOutModal from '../components/LogOutModal';
 import NavigationBar from '../components/NavigationBar';
@@ -23,6 +22,11 @@ const CinemaPage = () => {
         fetchCinemas();
     }, []);
 
+    const filteredCinemas = cinemas.filter((cinema) => 
+        cinema.placeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cinema.location.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div className="flex min-h-screen bg-gray-900">
             <div className={`flex-1 transition-all duration-300`}>
@@ -30,12 +34,13 @@ const CinemaPage = () => {
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                     setIsModalOpen={setIsModalOpen}
+                    searchPlaceholder="Search cinemas, locations..."
                 />
                 <div className="px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Available Cinemas</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        {cinemas.map((cinema) => (
-                            <div className="bg-gradient-to-br from-gray-800/80 to-gray-900 rounded-lg p-6 shadow-sm shadow-gray-600">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {filteredCinemas.map((cinema) => (
+                            <div className="bg-gray-900 rounded-lg p-6 border border-gray-700 shadow-md shadow-gray-800 transition-all duration-300 hover:shadow-none">
                                 <div className="flex justify-between items-center mb-1">
                                     <h3 className="text-xl font-semibold text-white">{cinema.placeName}</h3>
                                     <CinemaLogo placeName={cinema.placeName} />
@@ -74,7 +79,6 @@ const CinemaPage = () => {
                             </div>
                         ))}
                     </div>
-                    <h1 className='mt-7 py-2 rounded-lg text-center font-bold text-gray-700 border-1'>More Cinema Coming Soon</h1>
                 </div>
             </div>
             <LogOutModal 

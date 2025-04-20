@@ -82,9 +82,9 @@ const TicketPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
                         {filteredTickets.map((ticket) => (
                             <div className="bg-gray-900 rounded-xl shadow-sm shadow-gray-600  transition-colors duration-300">
-                                <div className="relative h-28 overflow-hidden group">
-                                    <img src={ticket.moviePoster} alt={ticket.movieTitle} className="w-full h-full rounded-xl object-cover transform transition duration-300 group-hover:scale-125" />
-                                    <div className="absolute inset-0  bg-gradient-to-t from-gray-900 to-transparent"></div>
+                                <div className="relative h-28 overflow-hidden group rounded-xl">
+                                    <img src={ticket.moviePoster} alt={ticket.movieTitle} className="w-full h-full rounded-xl object-cover transform transition duration-300 scale-125 group-hover:scale-100" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                                 </div>
 
                                 <div className="pt-2 pb-4 px-5 ">

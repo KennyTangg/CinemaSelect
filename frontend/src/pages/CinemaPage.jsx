@@ -40,7 +40,7 @@ const CinemaPage = () => {
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Available Cinemas</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {filteredCinemas.map((cinema) => (
-                            <div className="bg-gray-900 rounded-lg p-6 border border-gray-700 shadow-md shadow-gray-800 transition-all duration-300 hover:shadow-none">
+                            <div className="bg-gray-900 rounded-lg p-6 border border-gray-700 shadow-md shadow-gray-800 transition-all duration-400 hover:shadow-none hover:border-opacity-50">
                                 <div className="flex justify-between items-center mb-1">
                                     <h3 className="text-xl font-semibold text-white">{cinema.placeName}</h3>
                                     <CinemaLogo placeName={cinema.placeName} />

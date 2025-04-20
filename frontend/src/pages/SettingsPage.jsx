@@ -49,7 +49,7 @@ const SettingsPage = () => {
                             <input 
                                 type="email"
                                 value="john.doe@email.com"
-                                className="w-1/2 px-4 py-2 rounded-lg border border-gray-700"
+                                className="w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <div className='pb-4 space-y-2'>
@@ -57,7 +57,7 @@ const SettingsPage = () => {
                             <input 
                                 type="password"
                                 value="••••••••"
-                                className="w-1/4 px-4 py-2 rounded-lg border border-gray-700"
+                                className="w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <button className='bg-green-700 text-sm rounded px-5 py-2 font-semibold hover:bg-green-700/90'>Update Account</button>
@@ -67,9 +67,9 @@ const SettingsPage = () => {
             case 'language':
                 return (
                     <div className='space-y-6'>
-                        <div className='pb-4 space-y-2'>
-                            <h1 className='text-2xl font-semibold'>Language Settings</h1>
-                            <hr className='text-gray-700 mb-10' />
+                        <div>
+                            <h1 className='text-2xl font-semibold pb-2'>Language Settings</h1>
+                            <hr className='text-gray-700 mb-8' />
                             <select className='bg-gray-800 text-gray-300 px-4 py-2 rounded-lg w-62'>
                                 <option>English</option>
                                 <option>Bahasa Indonesia</option>
@@ -241,7 +241,7 @@ const SettingsPage = () => {
                             <input 
                                 type="email"
                                 value="john.doe@email.com"
-                                className="w-1/2 px-4 py-2 rounded-lg border border-gray-700"
+                                className="w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <div className='pb-4 space-y-2'>
@@ -249,7 +249,7 @@ const SettingsPage = () => {
                             <input 
                                 type="password"
                                 value="••••••••"
-                                className="w-1/4 px-4 py-2 rounded-lg border border-gray-700"
+                                className="w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <button className='bg-green-700 text-sm rounded px-5 py-2 font-semibold hover:bg-green-700/90'>Update Account</button>

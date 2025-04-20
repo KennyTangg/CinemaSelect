@@ -19,7 +19,7 @@ const NavigationBar = ({ searchQuery, setSearchQuery, setIsModalOpen, searchPlac
                         placeholder={searchPlaceholder}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="border-1 border-gray-600 text-gray-300 text-sm py-2 px-10 w-96 rounded focus:outline-none focus:ring focus:ring-gray-500"
+                        className="border-1 border-gray-600 bg-gray-900 text-gray-300 text-sm py-2 px-10 w-96 rounded focus:outline-none focus:ring focus:ring-gray-500"
                     />
                     <Search className="absolute left-3 top-1.5 text-gray-400" />
                 </div>

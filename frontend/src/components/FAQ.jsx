@@ -33,14 +33,16 @@ const FAQ = () => {
     {isHomePage 
     ? (<>
         <h1>Frequently Asked Questions</h1>
-        <div className="question">
+        <div className="question select-none">
           {questions.map((question, index) => (
             <span>
-              <div onClick={() => handleClick(index)} className="hover:bg-gray-700/70 hover:cursor-pointer" >
+              <div onClick={() => handleClick(index)} >
                 <h6>{question.ask}</h6>
                 <i>{activeIndex !== index ? <Add /> : <Close />}</i>
               </div>
-              <p style={{ display: activeIndex === index ? 'block' : 'none' }} >{question.answer}</p>
+              <p className={`duration-500 ${activeIndex === index 
+              ? 'animate-in fade-in slide-in-from-top-3 ' : 'animate-out fade-out slide-out-to-top-3 '}`}
+              style={{ display: activeIndex === index ? 'block' : 'none' }} >{question.answer}</p>
             </span>
           ))}
         </div> 

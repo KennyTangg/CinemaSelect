@@ -5,6 +5,7 @@ import axios from 'axios';
 import CinemaTimeSlot from '../components/CinemaTimeSlot';
 import CinemaLogo from '../components/CinemaLogo';
 import { ArrowBack } from '@mui/icons-material';
+import { format } from 'date-fns';
 
 const MoviePage = () => {
     const { path } = useParams();
@@ -24,9 +25,9 @@ const MoviePage = () => {
             date.setDate(date.getDate() + i);
             days.push({
                 full: date,
-                day: date.toLocaleDateString('en-US', { weekday: 'short' }),
-                date: date.getDate().toString().padStart(2, '0'),
-                month: date.toLocaleDateString('en-US', { month: 'short' })
+                day: format(date, 'EEE'),
+                date: format(date, 'dd'),
+                month: format(date, 'MMM')
             });
         }
         return days;
@@ -69,12 +70,7 @@ const MoviePage = () => {
     };
 
     const handleTimeSelect = (type, time, price, cinema) => {
-        setSelectedTime({
-            type,
-            time,
-            price,
-            cinema
-        });
+        setSelectedTime({type, time, price, cinema});
     };
 
     const handleBooking = () => {
@@ -119,16 +115,18 @@ const MoviePage = () => {
                     allowFullScreen
                 ></iframe>
             </div>
-            <section className='flex gap-8 sm:mx-50'>
+            <section className='flex gap-8 px-50'>
                 <img src={movie.posterPath} className='relative bottom-10 w-35 sm:w-48 rounded-lg' alt={movie.title} />
                 <div className='text-gray-400 space-y-1 w-full'>
                     <h1 className='text-2xl pt-8 font-bold text-gray-200'>{movie.title}</h1>
-                    <p>Genre : <span className='pl-10 text-gray-200'>{movie.genre}</span></p>
-                    <p>Duration : <span className='pl-5 text-gray-200'>{movie.duration} minutes</span></p>
-                    <p>Director : <span className='pl-6 text-gray-200'>{movie.director}</span></p>
+                    <p>Genre : <span className='pl-19 text-gray-200'>{movie.genre}</span></p>
+                    <p>Duration : <span className='pl-15 text-gray-200'>{movie.duration} minutes</span></p>
+                    <p>Director : <span className='pl-16 text-gray-200'>{movie.director}</span></p>
+                    <p>Release Date : <span className='pl-6 text-gray-200'>{format(new Date(movie.releaseDate), 'dd MMM yyyy')}</span></p>
+                    <p>Rating : <span className='pl-19 text-gray-200'>{movie.rating}</span></p>
                 </div>               
             </section>
-            <div className='flex justify-around pb-4 text-gray-400 font-bold mx-50'>
+            <div className='flex justify-around pb-4 text-gray-400 font-bold px-50'>
                 <button 
                     onClick={handleClick} 
                     className={`${isSelected ? "text-gray-100 border-b-2" : "text-gray-500 hover:cursor-pointer hover:bg-gray-800"} py-2 w-full`}
@@ -144,9 +142,9 @@ const MoviePage = () => {
             </div>
             
             {isSelected ? (
-                <p className='mx-50'>{movie.synopsis}</p>
+                <p className='px-50'>{movie.synopsis}</p>
             ) : (
-                <div className='mx-50'>
+                <div className='px-50'>
                     {/* Date Selection */}
                     <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
                         {getShowDates().map((day, index) => (

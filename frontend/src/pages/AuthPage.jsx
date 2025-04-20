@@ -44,7 +44,7 @@ const Auth = () => {
     };
 
     return (
-        <div className="bg-gray-900/80 px-15 sm:px-19 pb-20 pt-15 rounded-xl border border-gray-700/70 shadow-md shadow-gray-800 w-full max-w-md z-50">
+        <div className="bg-gray-900 px-15 sm:px-19 pb-20 pt-15 rounded-xl border border-gray-800 shadow-md shadow-gray-800 w-full max-w-md z-50 animate-in fade-in duration-500">
             <h2 className="text-3xl font-bold text-center text-yellow-400">
                 {isLoginPage ? "Login to your account" : "Create an account"}
             </h2>
@@ -64,7 +64,7 @@ const Auth = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full px-4 py-2 mt-2 border border-gray-400 rounded-md text-sm focus:ring-2 focus:ring-yellow-400"
+                        className="w-full px-4 py-2 mt-2 bg-gray-900/80 border border-gray-500 rounded-md text-sm focus:ring-2 focus:ring-yellow-400"
                         placeholder='Enter your email'
                         disabled={isLoading}
                     />
@@ -77,7 +77,7 @@ const Auth = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="w-full px-4 py-2 mt-2 border border-gray-400 rounded-md text-sm focus:ring-2 focus:ring-yellow-400"
+                        className="w-full px-4 py-2 mt-2 bg-gray-900/80 border border-gray-500 rounded-md text-sm focus:ring-2 focus:ring-yellow-400"
                         placeholder='Enter your password'
                         disabled={isLoading}
                     />

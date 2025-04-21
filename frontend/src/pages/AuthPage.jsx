@@ -30,7 +30,7 @@ const Auth = () => {
             navigate('/main');
         } catch (error) {
             setIsLoading(false);
-            setError('An error occurred. Please try again.');
+            setError(error.response?.data?.message || 'An error occurred. Please try again.');
         }
     };
 

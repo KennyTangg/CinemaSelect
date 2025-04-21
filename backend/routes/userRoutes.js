@@ -51,7 +51,6 @@ userRouter.post('/signup', async (req, res) => {
 userRouter.post('/login', async (req, res) => {
   try {
     const { email, password, rememberMe } = req.body;
-
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Email not exist' });
@@ -61,15 +60,9 @@ userRouter.post('/login', async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: 'Wrong Password' });
     }
-
     const expiresIn = rememberMe ? '7d' : '1d';
     
-    const token = jwt.sign(
-      { id: user._id }, 
-      process.env.JWT_SECRET, 
-      { expiresIn }
-    );
-
+    const token = jwt.sign( { id: user._id }, process.env.JWT_SECRET, { expiresIn });
     res.json({ token, expiresIn });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
@@ -77,4 +70,6 @@ userRouter.post('/login', async (req, res) => {
 });
 
 module.exports = userRouter;
+
+
 

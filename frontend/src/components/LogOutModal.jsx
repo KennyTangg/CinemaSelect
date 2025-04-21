@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 const LogOutModal = ({isOpen, setModalOpen}) => {
     const navigate = useNavigate();
+    const removeToken = () => {
+        localStorage.removeItem("token");
+        navigate('/');
+    }
 
     if (!isOpen) return true;
 
@@ -15,7 +19,7 @@ const LogOutModal = ({isOpen, setModalOpen}) => {
                     <button onClick={() => setModalOpen(false)} className="px-12 py-1 rounded border text-gray-400 hover:bg-gray-700"> 
                         Cancel 
                     </button>
-                    <button onClick={() => navigate('/')} className='px-12 py-1 rounded text-red-500 bg-gray-900 hover:text-gray-200 hover:bg-red-700'> 
+                    <button onClick={removeToken} className='px-12 py-1 rounded text-red-500 bg-gray-900 hover:text-gray-200 hover:bg-red-700'> 
                         Log Out 
                     </button>
                 </span>

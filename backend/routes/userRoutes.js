@@ -50,7 +50,7 @@ userRouter.post('/signup', async (req, res) => {
 // Login user
 userRouter.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -62,14 +62,19 @@ userRouter.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Wrong Password' });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1d',
-    });
+    const expiresIn = rememberMe ? '7d' : '1d';
+    
+    const token = jwt.sign(
+      { id: user._id }, 
+      process.env.JWT_SECRET, 
+      { expiresIn }
+    );
 
-    res.json({ token });
+    res.json({ token, expiresIn });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
 });
 
 module.exports = userRouter;
+

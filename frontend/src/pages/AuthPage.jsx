@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import authImage from "../assets/auth-background.jpg";
-import { ArrowBack } from '@mui/icons-material';
+import { ArrowBack, RemoveFromQueue } from '@mui/icons-material';
 import axios from 'axios';
 
 const Auth = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -22,25 +23,19 @@ const Auth = () => {
 
         try {
             const endpoint = isLoginPage ? '/api/users/login' : '/api/users/signup';
-            const response = await axios.post(endpoint, {
-                email,
-                password
-            });
-
+            const response = await axios.post(endpoint, { email, password, rememberMe: rememberMe });
             const { token } = response.data;
             
             localStorage.setItem('token', token);
-            
             navigate('/main');
-            
         } catch (error) {
-            setError(
-                error.response?.data?.message || 
-                'An error occurred. Please try again.'
-            );
-        } finally {
             setIsLoading(false);
+            setError('An error occurred. Please try again.');
         }
+    };
+
+    const ToggleRememberMe = () => {
+        setRememberMe(!rememberMe)
     };
 
     return (
@@ -60,7 +55,6 @@ const Auth = () => {
                 <div className="mb-4">
                     <input
                         type="email"
-                        id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -73,7 +67,6 @@ const Auth = () => {
                 <div className={isLoginPage ? "mb-4" : "mb-10"}>
                     <input
                         type="password"
-                        id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -86,7 +79,7 @@ const Auth = () => {
                 {isLoginPage && 
                 <div className='flex items-center justify-between mb-10'>
                     <div className='flex items-center'>
-                        <input type="checkbox" id="checkbox" disabled={isLoading} />
+                        <input type="checkbox" id="checkbox" onChange={ToggleRememberMe} disabled={isLoading} />
                         <label htmlFor='checkbox' className="ml-1.5 text-xs text-gray-400 hover:cursor-pointer">
                             Remember me
                         </label>

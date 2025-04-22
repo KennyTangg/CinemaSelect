@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <>
+    <div className="relative">
       <header className="navigation-bar">
         <p>Cinema <span>Select</span></p>
         <div> 
@@ -23,7 +23,9 @@ const Hero = () => {
         </div>
         <img src={heroImage} alt="Main Banner Image"/>
       </section>
-    </>
+      
+      <div className='absolute bottom-0 h-[30vh] w-full bg-gradient-to-t from-gray-900 to-transparent'></div>
+    </div>
   )
 }
 export default Hero

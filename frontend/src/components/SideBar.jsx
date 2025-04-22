@@ -51,13 +51,10 @@ const SideBar = ({ isOpen, onToggle }) => {
     return (
         <>
         <div className='flex items-center gap-5'>
-            <button 
-                onClick={onToggle} 
-                className={`text-gray-400 border rounded p-1.5 border-gray-600 hover:bg-gray-800`}
-            >
+            <button onClick={onToggle} className={`text-gray-400 border-0 rounded p-1.5 border-gray-600 hover:bg-gray-800 md:border md:border-gray-600`}>
                 <Menu /> 
             </button>
-            <h1 className="text-xl font-medium text-yellow-400 select-none">
+            <h1 className=" text-xl font-medium text-yellow-400 select-none">
                 <span className='text-white'>Cinema</span>Select
             </h1>
         </div>
@@ -65,8 +62,8 @@ const SideBar = ({ isOpen, onToggle }) => {
         {animationState !== 'closed' && (
             <div className={`fixed top-0 left-0 h-full w-full z-50 bg-black/30 transition-opacity duration-300
                 ${animationState === 'opened' || animationState === 'opening' ? 'opacity-100' : 'opacity-0'}`}>
-                <div className={`w-70 z-60 bg-gray-900 border-r-2 border-gray-800 rounded-2xl fixed top-0 left-0 h-full
-                    transition-transform duration-300 ease-out ${getAnimationClasses()}`}
+                <div className={`w-60 z-60 bg-gray-900 border-r-2 border-gray-800 rounded-2xl fixed top-0 left-0 h-full
+                    sm:w-70 transition-transform duration-300 ease-out ${getAnimationClasses()}`}
                 >
                     <div className="pl-6 pr-3 py-4 flex items-center justify-between">
                         <h1 className="text-lg font-medium text-yellow-400 select-none">
@@ -80,7 +77,7 @@ const SideBar = ({ isOpen, onToggle }) => {
                     <div className="px-4 py-2">
                         {items.map((item) => (
                             <Link to={item.path}
-                                className="flex items-center text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
+                                className="flex items-center text-xs sm:text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
                                 {item.icon}<span>{item.label}</span>
                             </Link>
                         ))}
@@ -89,7 +86,7 @@ const SideBar = ({ isOpen, onToggle }) => {
                     <div className="absolute w-full bottom-0 p-4">
                         {bottomItems.map((item) => (
                             <Link to={item.path}
-                                className="flex items-center text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
+                                className="flex items-center text-xs sm:text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
                                 {item.icon}<span>{item.label}</span>
                             </Link>
                         ))}

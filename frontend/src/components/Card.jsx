@@ -38,7 +38,7 @@ const Card = () => {
   return (
     <>
       <div className={`${isHomePage 
-        ? 'grid mx-auto gap-5 grid-cols-2 xl:gap-10 lg:grid-cols-4 sm:grid-cols-2' 
+        ? 'grid px-4 sm:mx-auto gap-5 grid-cols-2 xl:gap-10 sm:grid-cols-3 lg:grid-cols-4' 
         : 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-10'}`}>
         {isHomePage 
           ? displayedMovies.map((movie) => (

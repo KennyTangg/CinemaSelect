@@ -43,6 +43,7 @@ userRouter.post('/signup', async (req, res) => {
 
     res.json({ token });
   } catch (error) {
+    console.error(error)
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -65,6 +66,7 @@ userRouter.post('/login', async (req, res) => {
     const token = jwt.sign( { id: user._id }, process.env.JWT_SECRET, { expiresIn });
     res.json({ token, expiresIn });
   } catch (error) {
+    console.error(error)
     res.status(500).json({ message: 'Server error' });
   }
 });

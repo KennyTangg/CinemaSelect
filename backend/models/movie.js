@@ -39,13 +39,12 @@ const movieSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  trailer:{
+  trailer: {
     type: String,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
   }
 });
 
 module.exports = mongoose.model('Movie', movieSchema);
+
+
+

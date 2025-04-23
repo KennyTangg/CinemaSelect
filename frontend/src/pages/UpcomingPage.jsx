@@ -52,9 +52,9 @@ const UpcomingPage = () => {
                     searchPlaceholder='Search upcoming shows...'
                 />
 
-                <section className="px-20 py-8">
+                <section className="px-10 sm:px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Upcoming Shows</h2>
-                    <div className='grid grid-cols-5 gap-10'>
+                    <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-10'>
                         {filteredMovies.map((movie) => (
                             <div className='flex flex-col items-center gap-5  pb-2 shadow-sm shadow-gray-600 rounded-lg'>
                                 <img src={movie.poster} alt={movie.title} 

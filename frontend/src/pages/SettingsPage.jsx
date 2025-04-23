@@ -49,7 +49,7 @@ const SettingsPage = () => {
                             <input 
                                 type="email"
                                 value="john.doe@email.com"
-                                className="w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                                className="sm:w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <div className='pb-4 space-y-2'>
@@ -57,7 +57,7 @@ const SettingsPage = () => {
                             <input 
                                 type="password"
                                 value="••••••••"
-                                className="w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                                className="sm:w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <button className='bg-green-700 text-sm rounded px-5 py-2 font-semibold hover:bg-green-700/90'>Update Account</button>
@@ -241,7 +241,7 @@ const SettingsPage = () => {
                             <input 
                                 type="email"
                                 value="john.doe@email.com"
-                                className="w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                                className="sm:w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <div className='pb-4 space-y-2'>
@@ -249,7 +249,7 @@ const SettingsPage = () => {
                             <input 
                                 type="password"
                                 value="••••••••"
-                                className="w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                                className="sm:w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
                         <button className='bg-green-700 text-sm rounded px-5 py-2 font-semibold hover:bg-green-700/90'>Update Account</button>
@@ -261,24 +261,24 @@ const SettingsPage = () => {
     return (
         <>
             <NavigationBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} setIsModalOpen={setIsModalOpen} />
-            <div className="px-20 py-8">
+            <div className="px-10 sm:px-20 py-8">
                 <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Settings</h2>
-                <section className='grid grid-cols-4 gap-6'>
-                    <div className='flex flex-col gap-2 col-span-1'>
+                <section className='flex flex-col sm:flex-row gap-6'>
+                    <div className='flex overflow-x-auto sm:flex-col gap-5 sm:gap-2 sm:w-80'>
                         {settingOptions.map((option) => (<>
                             {option.name === 'Sign Out' &&  <hr className='text-gray-700 mx-3' /> }
                             <button onClick={() => handleOptionClick(option.url)}
-                                className={`flex justify-between font-medium px-4 py-2 text-sm rounded-lg text-gray-400 hover:bg-gray-800
+                                className={`flex items-center justify-between font-medium px-4 py-2 text-sm rounded-lg text-gray-400 hover:bg-gray-800
                                     ${(location.pathname === `/settings/${option.url}` || (location.pathname === '/settings' && option.url === 'account')) 
                                        ? 'text-white hover:bg-gray-900' : ''}
                                     ${option.name === 'Sign Out' && 'text-red-500 hover:text-red-700 hover:bg-gray-900'}`}
                             >
                                 {option.name} 
-                                {option.url === 'sign-out' ? '' : <KeyboardArrowRightIcon /> }
+                                <span className='hidden sm:block'>{option.url === 'sign-out' ? '' : <KeyboardArrowRightIcon /> }</span>
                             </button>
                         </>))}
                     </div>
-                    <div className='col-span-3 px-8 bg-gray-900'>
+                    <div className='flex-1 p-2 sm:px-8 sm:py-0 bg-gray-900'>
                         {renderContent()}
                     </div>
                 </section>

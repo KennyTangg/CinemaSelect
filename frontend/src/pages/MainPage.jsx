@@ -17,7 +17,7 @@ const MainPage = () => {
                     setIsModalOpen={setIsModalOpen}
                 />
 
-                <div className="px-20 py-8">
+                <div className="px-10 sm:px-20 py-8">
                     <section className="mb-12">
                         <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Featured Movies</h2>
                         <div>

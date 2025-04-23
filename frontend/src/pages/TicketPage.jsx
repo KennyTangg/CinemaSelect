@@ -76,10 +76,10 @@ const TicketPage = () => {
                     setSearchQuery={setSearchQuery}
                     setIsModalOpen={setIsModalOpen}
                 />
-                <div className="px-20 py-8">
+                <div className="px-15 sm:px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">My Tickets</h2>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-5">
                         {filteredTickets.map((ticket) => (
                             <div className="bg-gray-900 rounded-xl shadow-sm shadow-gray-600  transition-colors duration-300">
                                 <div className="relative h-28 overflow-hidden group rounded-xl">

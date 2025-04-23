@@ -64,7 +64,7 @@ const HistoryPage = () => {
                     setSearchQuery={setSearchQuery}
                     setIsModalOpen={setIsModalOpen}
                 />
-                <div className="px-20 py-8">
+                <div className="px-10 sm:px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Booking History</h2>
                     {loading 
                     ? ( <div className="text-center text-gray-400">Loading...</div>)
@@ -73,14 +73,14 @@ const HistoryPage = () => {
                     : filteredHistory.length === 0 
                     ? ( <div className="text-center text-gray-400">No ticket history found</div>) 
                     : (
-                        <div className="grid gap-6">
+                        <div className="grid gap-10 sm:gap-6">
                             {filteredHistory.map((ticket) => (
-                                <div className=" rounded-lg p-4 border-2 border-gray-800 shadow-sm shadow-gray-600">
-                                    <div className="flex gap-7">
-                                        <img src={ticket.moviePoster} alt={ticket.movieTitle} className="w-1/9 object-cover rounded brightness-85" />
+                                <div className=" rounded-lg px-6 py-3 sm:p-4 border-2 border-gray-800 shadow-sm shadow-gray-600">
+                                    <div className="flex gap-4 sm:gap-7">
+                                        <img src={ticket.moviePoster} alt={ticket.movieTitle} className="h-30 sm:w-1/9 lg:h-auto object-cover rounded brightness-85 mt-2 sm:mt-0" />
                                         <div className='flex-1'>
-                                            <h3 className="text-xl font-bold text-gray-00 my-2"> {ticket.movieTitle} </h3>
-                                            <div className="grid grid-cols-2 gap-10 text-gray-200 text-sm">
+                                            <h3 className="text-base sm:text-xl font-bold text-gray-00 my-2"> {ticket.movieTitle} </h3>
+                                            <div className="grid grid-cols-2 gap-4 sm:gap-10 text-gray-200 text-xs sm:text-sm">
                                                 <div className='space-y-1'>
                                                     <p>Cinema : <span className='text-gray-400'> {ticket.cinemaName}</span></p>
                                                     <p>Date :  <span className='text-gray-400'>{new Date(ticket.showDate).toLocaleDateString()}</span></p>
@@ -95,26 +95,26 @@ const HistoryPage = () => {
                                                     }`}>{ticket.status}</span></p>
                                                 </div>
                                             </div>
-                                            <p className="mt-4 mr-2 text-right text-yellow-400 font-medium">
+                                            <p className="mt-4 mr-2 text-right text-yellow-400 font-medium text-sm sm:text-base">
                                                 IDR {ticket.price.toLocaleString()}
                                             </p>
-                                            <div className="mt-4 mr-2 flex justify-end space-x-4 font-semibold text-sm">
+                                            <div className="mt-4 sm:mr-2 flex justify-between sm:justify-end space-x-4 font-semibold text-xs sm:text-sm">
                                                 {ticket.status === 'active' 
                                                 ? ( <>
                                                         <button
                                                             onClick={() => handleStatusUpdate(ticket.ticketId, 'used')}
-                                                            className="px-4 py-2 w-36 bg-green-400/80 text-gray-900 rounded hover:bg-green-600"
+                                                            className="px-4 py-2 w-22 sm:w-36 bg-green-400/80 text-gray-900 rounded hover:bg-green-600"
                                                         >
                                                             Mark as Used
                                                         </button>
                                                         <button
                                                             onClick={() => handleStatusUpdate(ticket.ticketId, 'cancelled')}
-                                                            className="px-4 py-2 w-36 bg-red-400/80 text-gray-900 rounded hover:bg-red-600"
+                                                            className="px-4 py-2 w-22 sm:w-36 bg-red-400/80 text-gray-900 rounded hover:bg-red-600"
                                                         >
                                                             Cancel Ticket
                                                         </button>
                                                     </> )
-                                                : <button className="px-4 py-2 w-36 border-2 border-gray-600 text-gray-500 rounded" >Ticket Used</button>}
+                                                : <><div></div><button className="px-4 py-2 w-36 border-2 border-gray-600 text-gray-500 rounded" >Ticket Used</button></>}
                                             </div>
                                         </div>
                                     </div>

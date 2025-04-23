@@ -104,7 +104,7 @@ const MoviePage = () => {
             <Link to="/main">
                 <button className='flex gap-2.5 sm:bg-gray-800 sm:text-gray-500 font-semibold px-8 py-2.5 rounded-lg z-20 absolute top-10 left-1 sm:left-20 hover:cursor-pointer'> 
                     <ArrowBack /> 
-                    <h2>Back</h2>
+                    <h2 className='hidden sm:block'>Back</h2>
                 </button>
             </Link>
             <div className='flex justify-center bg-gray-950'>
@@ -115,10 +115,10 @@ const MoviePage = () => {
                     allowFullScreen
                 ></iframe>
             </div>
-            <section className='flex gap-8 px-50'>
-                <img src={movie.posterPath} className='relative bottom-10 w-35 sm:w-48 rounded-lg' alt={movie.title} />
-                <div className='text-gray-400 space-y-1 w-full'>
-                    <h1 className='text-2xl pt-8 font-bold text-gray-200'>{movie.title}</h1>
+            <section className='flex gap-4 sm:gap-8 px-6 sm:px-50'>
+                <img src={movie.posterPath} className='relative bottom-10 h-50 sm:w-48 sm:h-auto object-cover rounded-lg' alt={movie.title} />
+                <div className='text-gray-400 space-y-2 sm:space-y-1 w-full text-sm sm:text-base'>
+                    <h1 className='text-xl sm:text-2xl pt-4 sm:pt-8 font-bold text-gray-200'>{movie.title}</h1>
                     <p>Genre : <span className='pl-19 text-gray-200'>{movie.genre}</span></p>
                     <p>Duration : <span className='pl-15 text-gray-200'>{movie.duration} minutes</span></p>
                     <p>Director : <span className='pl-16 text-gray-200'>{movie.director}</span></p>
@@ -126,7 +126,7 @@ const MoviePage = () => {
                     <p>Rating : <span className='pl-19 text-gray-200'>{movie.rating}</span></p>
                 </div>               
             </section>
-            <div className='flex justify-around pb-4 text-gray-400 font-bold px-50'>
+            <div className='flex justify-around mt-4 sm:mt-0 pb-4 text-gray-400 font-bold  sm:px-50'>
                 <button 
                     onClick={handleClick} 
                     className={`${isSelected ? "text-gray-100 border-b-2" : "text-gray-500 hover:cursor-pointer hover:bg-gray-800"} py-2 w-full`}
@@ -142,10 +142,9 @@ const MoviePage = () => {
             </div>
             
             {isSelected ? (
-                <p className='px-50'>{movie.synopsis}</p>
+                <p className='px-10 text-md sm:text-base sm:px-50'>{movie.synopsis}</p>
             ) : (
-                <div className='px-50'>
-                    {/* Date Selection */}
+                <div className='px-7 sm:px-50'>
                     <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
                         {getShowDates().map((day, index) => (
                             <button
@@ -165,19 +164,17 @@ const MoviePage = () => {
                         ))}
                     </div>
 
-                    {/* Show Times */}
                     {selectedDate && (
                         <div className="my-6">
                             <h3 className="text-gray-200 mb-4 text-lg">Available Ticket</h3>
-                            <div className='flex flex-col gap-6'>
+                            <div className='flex flex-col gap-10 sm:gap-6'>
                                 {cinemas.map((cinema, index) => (
-                                    <div key={index} className='rounded-2xl px-10 p-6 bg-gray-900 border-2 border-gray-800 shadow-lg shadow-gray-950'>
+                                    <div key={index} className='rounded-2xl p-5 sm:px-10 sm:py-6 bg-gray-900 border-2 border-gray-800 shadow-lg shadow-gray-950'>
                                         <span className='flex justify-between'>
                                             <h1 className='font-bold text-lg'>{cinema.placeName}</h1>
                                             <CinemaLogo placeName={cinema.placeName}/>
                                         </span>
                                         <p className='text-xs text-gray-500'>{cinema.location}</p>
-                                        
                                         <CinemaTimeSlot 
                                             type="2D"
                                             price={cinema.price2D}

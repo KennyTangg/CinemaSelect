@@ -77,7 +77,7 @@ const SideBar = ({ isOpen, onToggle }) => {
                     <div className="px-4 py-2">
                         {items.map((item) => (
                             <Link to={item.path}
-                                className="flex items-center text-xs sm:text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
+                                className="flex items-center text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
                                 {item.icon}<span>{item.label}</span>
                             </Link>
                         ))}
@@ -86,7 +86,7 @@ const SideBar = ({ isOpen, onToggle }) => {
                     <div className="absolute w-full bottom-0 p-4">
                         {bottomItems.map((item) => (
                             <Link to={item.path}
-                                className="flex items-center text-xs sm:text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
+                                className="flex items-center text-sm space-x-4 text-gray-300 hover:bg-gray-800 rounded-lg px-3 py-2 mb-2">
                                 {item.icon}<span>{item.label}</span>
                             </Link>
                         ))}

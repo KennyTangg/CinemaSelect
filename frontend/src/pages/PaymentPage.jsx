@@ -107,36 +107,40 @@ const PaymentPage = () => {
     return (
         <div className="min-h-screen bg-gray-900 mt-8">
             <Link to="/main">
-                <button className='relative left-10 flex gap-2.5 text-yellow-400 font-semibold'> 
+                <button className='relative left-10 flex gap-2.5 text-yellow-400 font-semibold mb-6 sm:mb-0'> 
                     <ArrowBack /> 
                     <span>Back</span>
                 </button>
             </Link>
 
-            <div className="mx-20 grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+            <div className="mb-6 mx-5 sm:mx-20 grid grid-cols-1 md:grid-cols-3 gap-8 sm:mt-6">
                 <div className="md:col-span-2">
                     <div className="mb-10 mt-2">
                         <div className="h-2 bg-gray-400 rounded-lg mb-2 w-5/6 mx-auto"></div>
                         <p className="text-center text-gray-400 text-sm">Screen</p>
                     </div>
 
-                    <div className="mb-12">
-                        <div className="grid grid-cols-22 gap-2.5 mb-8">
-                            {rows.map(row => createSeatLayout(row))}
-                        </div>
+                    <div className="overflow-x-auto pb-4">
+                        <div className="min-w-[900px]">
+                            <div className="mb-4 sm:mb-12">
+                                <div className="grid grid-cols-22 gap-2.5 mb-8">
+                                    {rows.map(row => createSeatLayout(row))}
+                                </div>
 
-                        <div className="flex justify-center gap-12 text-sm">
-                            <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 bg-gray-700 rounded border-1 border-gray-500"></div>
-                                <span className="text-gray-400">Available</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 bg-yellow-400 rounded"></div>
-                                <span className="text-gray-400">Selected</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 bg-gray-950 rounded border-1 border-gray-600"></div>
-                                <span className="text-gray-400">Occupied</span>
+                                <div className="flex justify-center gap-12 text-sm">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-5 h-5 bg-gray-700 rounded border-1 border-gray-500"></div>
+                                        <span className="text-gray-400">Available</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-5 h-5 bg-yellow-400 rounded"></div>
+                                        <span className="text-gray-400">Selected</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-5 h-5 bg-gray-950 rounded border-1 border-gray-600"></div>
+                                        <span className="text-gray-400">Occupied</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

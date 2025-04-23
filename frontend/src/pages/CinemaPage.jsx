@@ -36,9 +36,9 @@ const CinemaPage = () => {
                     setIsModalOpen={setIsModalOpen}
                     searchPlaceholder="Search cinemas, locations..."
                 />
-                <div className="px-20 py-8">
+                <div className="px-10 sm:px-20 py-8">
                     <h2 className="text-2xl font-semibold text-yellow-400 mb-6">Available Cinemas</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-6">
                         {filteredCinemas.map((cinema) => (
                             <div className="bg-gray-900 rounded-lg p-6 border border-gray-700 shadow-md shadow-gray-800 transition-all duration-400 hover:shadow-none hover:border-opacity-50">
                                 <div className="flex justify-between items-center mb-1">

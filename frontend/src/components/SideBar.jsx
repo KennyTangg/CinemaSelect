@@ -11,6 +11,7 @@ import {
     Close,
     Menu
 } from '@mui/icons-material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const SideBar = ({ isOpen, onToggle }) => {
     const [animationState, setAnimationState] = useState('closed');
@@ -25,7 +26,7 @@ const SideBar = ({ isOpen, onToggle }) => {
 
     const bottomItems = [
         { icon: <span className="text-gray-500"><Settings /></span>, label: 'Settings', path: '/settings' },
-        { icon: <span className="text-gray-500"><Help /></span>, label: 'Help & Support', path: '/help' },
+        { icon: <span className="text-gray-500"><LogoutIcon /></span>, label: 'Sign Out', path: '/settings/sign-out' },
     ];
 
     useEffect(() => {

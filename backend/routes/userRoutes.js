@@ -71,7 +71,41 @@ userRouter.post('/login', async (req, res) => {
   }
 });
 
+// Get user data
+userRouter.get('/me', protect, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Update password
+userRouter.put('/update-password', protect, async (req, res) => {
+    try {
+        const { password } = req.body;
+        
+        if (!password || password.length < 6) {
+            return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+        }
+
+        const user = await User.findById(req.user.id);
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
+        
+        await user.save();
+        
+        res.json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 module.exports = userRouter;
+
 
 
 

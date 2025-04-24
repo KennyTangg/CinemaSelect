@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import NavigationBar from '../components/NavigationBar';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import LogOutModal from '../components/LogOutModal';
@@ -8,9 +9,62 @@ import FAQ from '../components/FAQ';
 const SettingsPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [userEmail, setUserEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    
     const location = useLocation();
     const navigate = useNavigate();
     const { option } = useParams();
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('/api/users/me', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setUserEmail(response.data.email);
+            } catch (error) {
+                console.error('Failed to fetch user data:', error);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    const handlePasswordUpdate = async () => {
+        setError('');
+        setSuccess('');
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+
+        if (password.length < 4) {
+            setError('Password must be at least 4 characters long');
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            const token = localStorage.getItem('token');
+            await axios.put('/api/users/update-password', 
+                { password },
+                { headers: { Authorization: `Bearer ${token}` }}
+            );
+            setSuccess('Password updated successfully');
+            setPassword("");
+            setConfirmPassword("");
+        } catch (error) {
+            setIsLoading(false);
+            setError(error.response?.data?.message || 'Failed to update password');
+        }
+    };
 
     const settingOptions = [
         { name: "Account", url: 'account' },
@@ -48,19 +102,45 @@ const SettingsPage = () => {
                             <h1 className='text-md'>Email</h1>
                             <input 
                                 type="email"
-                                value="john.doe@email.com"
-                                className="sm:w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                                value={userEmail}
+                                disabled
+                                className="sm:w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700 cursor-not-allowed"
                             />
                         </div>
-                        <div className='pb-4 space-y-2'>
-                            <h1 className='text-md'>Password</h1>
+                        <div className='space-y-2'>
+                            <h1 className='text-md'>New Password</h1>
                             <input 
                                 type="password"
-                                value="••••••••"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter new password"
                                 className="sm:w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
-                        <button className='bg-green-700 text-sm rounded px-5 py-2 font-semibold hover:bg-green-700/90'>Update Account</button>
+                        <div className='space-y-2'>
+                            <h1 className='text-md'>Confirm New Password</h1>
+                            <input 
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Confirm new password"
+                                className="sm:w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                            />
+                        </div>
+                        {error && (
+                            <div className="sm:w-5/12 px-4 py-2 text-red-700 bg-red-200 border-red-700 border-2 rounded text-sm font-semibold">{error}</div>
+                        )}
+                        {success && (
+                            <div className="sm:w-5/12 px-4 py-2 text-green-700 bg-green-200 border-green-700 border-2 rounded text-sm font-semibold">{success}</div>
+                        )}
+                        <button 
+                            onClick={handlePasswordUpdate}
+                            disabled={isLoading}
+                            className={`bg-green-700 text-sm rounded px-5 py-2 font-semibold 
+                                ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-700/90'}`}
+                        >
+                            {isLoading ? 'Updating...' : 'Update Password'}
+                        </button>
                     </div>
                 );
 
@@ -240,19 +320,45 @@ const SettingsPage = () => {
                             <h1 className='text-md'>Email</h1>
                             <input 
                                 type="email"
-                                value="john.doe@email.com"
-                                className="sm:w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                                value={userEmail}
+                                disabled
+                                className="sm:w-1/2 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700 cursor-not-allowed"
                             />
                         </div>
-                        <div className='pb-4 space-y-2'>
-                            <h1 className='text-md'>Password</h1>
+                        <div className='space-y-2'>
+                            <h1 className='text-md'>New Password</h1>
                             <input 
                                 type="password"
-                                value="••••••••"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter new password"
                                 className="sm:w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
                             />
                         </div>
-                        <button className='bg-green-700 text-sm rounded px-5 py-2 font-semibold hover:bg-green-700/90'>Update Account</button>
+                        <div className='pb-4 space-y-2'>
+                            <h1 className='text-md'>Confirm New Password</h1>
+                            <input 
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Confirm new password"
+                                className="sm:w-1/4 px-4 py-2 bg-gray-900 rounded-lg border border-gray-700"
+                            />
+                        </div>
+                        {error && (
+                            <div className="text-red-500 text-sm">{error}</div>
+                        )}
+                        {success && (
+                            <div className="text-green-500 text-sm">{success}</div>
+                        )}
+                        <button 
+                            onClick={handlePasswordUpdate}
+                            disabled={isLoading}
+                            className={`bg-green-700 text-sm rounded px-5 py-2 font-semibold 
+                                ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-700/90'}`}
+                        >
+                            {isLoading ? 'Updating...' : 'Update Password'}
+                        </button>
                     </div>
                 );
         }
